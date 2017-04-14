@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<context:component-scan
+		base-package="net.xinqushi.service.impl" />
+	<context:component-scan base-package="net.xinqushi.jms" />
+	<context:component-scan base-package="net.xinqushi.sms" />
+
+	<!-- local jms -->
+	<bean id="jmsConnFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+		destroy-method="stop">
+		<property name="connectionFactory">
+			<bean class="org.apache.activemq.ActiveMQSslConnectionFactory">
+				<property name="brokerURL" value="tcp://127.0.0.1:61616" />
+				<property name="userName" value="admin" />
+				<property name="password" value="admin" />
+			</bean>
+			
+			<!-- <bean class="org.apache.activemq.ActiveMQSslConnectionFactory">
+				<property name="brokerURL" value="${mq.broker.url}" />
+				<property name="userName" value="${mq.broker.username}" />
+				<property name="password" value="${mq.broker.password}" />
+				<property name="useAsyncSend" value="true" />
+				<property name="clientIDPrefix" value="uto_" />
+				<property name="trustStore" value="client.ts" />
+				<property name="trustStorePassword" value="UToRocks360" />
+				<property name="keyStore" value="client.ks" />
+				<property name="keyStorePassword" value="UToRocks360" />
+				<property name="trustAllPackages" value="true" />
+			</bean> -->
+		</property>
+		<property name="maxConnections" value="100" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"
+		p:connectionFactory-ref="jmsConnFactory" />
+
+	<!-- management updated event -->
+	<bean id="managementEventDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg>
+			<value>management-event</value>
+			<!-- <value>${mq.topic.name.manage.event}</value> -->
+		</constructor-arg>
+	</bean>
+	
+	<!-- audit logs -->
+	<bean id="auditLogDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>audit-logs</value>
+			<!-- <value>${mq.queue.name.audit.log}</value> -->
+		</constructor-arg>
+	</bean>
+	
+	<!-- <bean id="auditLogReceiver"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnFactory" />
+		<property name="destination" ref="auditLogDestination" />
+		<property name="messageListener" ref="auditLogProcessor" />
+		<property name="sessionAcknowledgeMode" value="1" />
+		<property name="pubSubDomain" value="true" />
+		<property name="subscriptionDurable" value="true" />
+		
+		<property name="clientId" value="xinqushi-auditlog-10086" />
+		<property name="durableSubscriptionName" value="xinqushi-auditlog-10086" />
+		
+		<property name="clientId" value="${mq.client.audit.log}" />
+		<property name="durableSubscriptionName" value="${mq.client.audit.log}" />
+		<property name="concurrentConsumers" value="2" />
+		<property name="maxConcurrentConsumers" value="6" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="idleTaskExecutionLimit" value="10" />
+		<property name="idleConsumerLimit" value="5" />
+	</bean> -->
+	
+	<!-- rating for driver -->
+	<bean id="ratingDriverDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>rating-driver</value>
+			<!-- <value>${mq.queue.name.rating.driver}</value> -->
+		</constructor-arg>
+	</bean>
+
+	<!-- <bean id="ratingDriverReceiver"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnFactory" />
+		<property name="destination" ref="ratingDriverDestination" />
+		<property name="messageListener" ref="ratingDriverProcessor" />
+		<property name="sessionAcknowledgeMode" value="1" />
+		<property name="pubSubDomain" value="true" />
+		<property name="subscriptionDurable" value="true" />
+		
+		<property name="clientId" value="xinqushi-ratingd-10086" />
+		<property name="durableSubscriptionName" value="xinqushi-ratingd-10086" />
+		
+		<property name="clientId" value="${mq.client.rating.driver}" />
+		<property name="durableSubscriptionName" value="${mq.client.rating.driver}" />
+		<property name="concurrentConsumers" value="2" />
+		<property name="maxConcurrentConsumers" value="4" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="idleTaskExecutionLimit" value="10" />
+		<property name="idleConsumerLimit" value="5" />
+	</bean> -->
+	
+	<!-- send sms -->
+	<bean id="smsDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>send-sms</value>
+			<!-- <value>${mq.queue.name.sms}</value> -->
+		</constructor-arg>
+	</bean>
+
+	<!-- <bean id="smsReceiver"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnFactory" />
+		<property name="destination" ref="smsDestination" />
+		<property name="messageListener" ref="smsDistributor" />
+		<property name="sessionAcknowledgeMode" value="1" />
+		<property name="pubSubDomain" value="true" />
+		<property name="subscriptionDurable" value="true" />
+		
+		<property name="clientId" value="xinqushi-sms-10086" />
+		<property name="durableSubscriptionName" value="xinqushi-sms-10086" />
+		
+		<property name="clientId" value="${mq.client.sms}" />
+		<property name="durableSubscriptionName" value="${mq.client.sms}" />
+		<property name="concurrentConsumers" value="3" />
+		<property name="maxConcurrentConsumers" value="6" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="idleTaskExecutionLimit" value="10" />
+		<property name="idleConsumerLimit" value="5" />
+	</bean> -->
+
+	<!-- send push msg -->
+	<bean id="pushMsgDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>send-push-msg</value>
+			<!-- <value>${mq.queue.name.push.msg}</value> -->
+		</constructor-arg>
+	</bean>
+
+	<!-- <bean id="pushMsgReceiver"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnFactory" />
+		<property name="destination" ref="pushMsgDestination" />
+		<property name="messageListener" ref="pushMsgSender" />
+		<property name="sessionAcknowledgeMode" value="1" />
+		<property name="pubSubDomain" value="true" />
+		<property name="subscriptionDurable" value="true" />
+		
+		<property name="clientId" value="xinqushi-push-10086" />
+		<property name="durableSubscriptionName" value="xinqushi-push-10086" />
+		
+		<property name="clientId" value="${mq.client.push.msg}" />
+		<property name="durableSubscriptionName" value="${mq.client.push.msg}" />
+		<property name="concurrentConsumers" value="3" />
+		<property name="maxConcurrentConsumers" value="6" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="idleTaskExecutionLimit" value="10" />
+		<property name="idleConsumerLimit" value="5" />
+	</bean> -->
+
+</beans>

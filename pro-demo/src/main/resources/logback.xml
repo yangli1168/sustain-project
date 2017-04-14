@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOG_HOME" value="${CATALINA_HOME}/logs/net.xinqushi/" />
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{H:mm} %-5level [%logger{16}] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/console.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{16} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	
+	<appender name="ConnectionPoolLog"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/c3p0.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{16} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	
+	<appender name="BaiduMap"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/baidu.map.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{16} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	
+	<appender name="YunPush"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/yunpush.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{16} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	
+	<logger name="net.xinqushi" level="info" >
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.springframework" level="info" >
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="ConnectionPoolLog" level="info" >
+		<appender-ref ref="ConnectionPoolLog" />
+	</logger>
+	<logger name="baiduMapLogger" level="info" >
+		<appender-ref ref="BaiduMap" />
+	</logger>
+	<logger name="yunPushLogger" level="info" >
+		<appender-ref ref="YunPush" />
+	</logger>
+
+	<root level="info">
+		<appender-ref ref="Console" />
+	</root>
+</configuration>
