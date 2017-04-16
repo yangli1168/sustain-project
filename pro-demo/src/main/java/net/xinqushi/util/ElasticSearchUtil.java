@@ -87,7 +87,7 @@ public class ElasticSearchUtil {
 		ElasticSearchUtil esUtil = new ElasticSearchUtil("Yang", "localhost");
 		// esUtil.putDoc(cities);
 //		System.out.println(esUtil.test());
-		esUtil.getInfo();
+//		esUtil.getInfo();
 	}
 
 	public String test() {
