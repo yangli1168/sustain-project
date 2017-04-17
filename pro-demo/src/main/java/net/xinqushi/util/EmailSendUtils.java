@@ -22,6 +22,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import net.xinqushi.common.constants.EmailConstants;
+
 /**
  * 邮件工具类
  * @author yangli 
@@ -30,19 +32,25 @@ import javax.mail.internet.MimeMultipart;
 public class EmailSendUtils {
 	/**
 	 * 
-	 * @param smtpHost  邮箱主机
-	 * @param from  发件人账号
-	 * @param fromUserPassword  发件人密码
+	 * @param smtpHost  邮箱主机,null时采用默认值
+	 * @param from  发件人账号,null时采用默认值
+	 * @param fromUserPassword  发件人密码,null时采用默认值
 	 * @param to  收件人
-	 * @param subject  邮件标题
+	 * @param subject  邮件标题,null时采用默认值
 	 * @param attachedFileName 附件路径[无文件时null,单文件时string,多文件时"list<<string>>"]
-	 * @param messageText  消息文本
-	 * @param messageType  消息类型,eg:text/html;charset=utf-8
+	 * @param messageText  消息文本,null时采用默认值
+	 * @param messageType  消息类型,null时采用默认值,eg:text/html;charset=utf-8
 	 * @throws MessagingException
 	 */
 	@SuppressWarnings({ "static-access", "rawtypes" })
 	public static String sendMessage(String smtpHost, String from, String fromUserPassword, 
 			String to, String subject, Object attachedFileName, String messageText, String messageType) throws MessagingException {
+		//prepare
+		smtpHost = smtpHost==null?EmailConstants.smtpHost:smtpHost;
+		from = from==null?EmailConstants.from:from;
+		fromUserPassword = fromUserPassword==null?EmailConstants.fromUserPassword:fromUserPassword;
+		
+		
 		// 第一步：配置javax.mail.Session对象
 		Properties props = new Properties();
 		props.put("mail.smtp.host", smtpHost);
@@ -50,7 +58,8 @@ public class EmailSendUtils {
 		// props.put("mail.smtp.port", "25"); //google使用465或587端口
 		props.put("mail.smtp.auth", "true"); // 使用验证
 		// props.put("mail.debug", "true");
-		Session mailSession = Session.getInstance(props, new MyAuthenticator(from, fromUserPassword));
+		Session mailSession = Session.getInstance(props, 
+				new MyAuthenticator(from, fromUserPassword));
 
 		// 第二步：编写消息
 		InternetAddress fromAddress = new InternetAddress(from);
@@ -97,7 +106,7 @@ public class EmailSendUtils {
 		}
 
 		// 第三步：发送消息
-		System.out.println("发送邮件中...");
+//		System.out.println("发送邮件中...");
 		Transport transport = mailSession.getTransport("smtp");
 		transport.connect(smtpHost, from, fromUserPassword);
 		transport.send(message, message.getRecipients(RecipientType.TO));

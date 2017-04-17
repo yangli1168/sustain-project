@@ -3,6 +3,7 @@ package net.xinqushi.service.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -75,14 +76,22 @@ public class EmailServiceImpl implements EmailService {
 			// 发送邮件
 			mailSender.send(mimeMessage);
 		} catch (MessagingException | IOException | TemplateException e) {
-			e.printStackTrace();
-			logger.info("helper配置异常");
+			logger.info("helper配置异常", e);
 		}
 	}
 	
-	public void send(){
+	public void sendEmail(String to, String subject, String messageText,List<String> attachedFileName) throws CommonException{
 		
-		EmailSendUtils.sendMessage(smtpHost, from, fromUserPassword, to, subject, attachedFileName, messageText, messageType);
+		try {
+			logger.info("start to send email to {}",to);
+			String returnMessage = EmailSendUtils.sendMessage(null, null, null, to, subject, attachedFileName, messageText, null);
+			if (!returnMessage.equals("success")) {
+				throw new CommonException("邮件发送失败");
+			}
+			logger.info("send email to {} successed ",to);
+		} catch (MessagingException e) {
+			logger.info("fail to send email", e);
+		}
 	}
 
 }
