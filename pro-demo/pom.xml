@@ -3,7 +3,7 @@
   <groupId>com.net</groupId>
   <artifactId>pro-demo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <!-- <packaging>war</packaging> -->
+  <packaging>war</packaging>
   
 	<!-- 版本管理 -->
 	<properties>
@@ -49,6 +49,9 @@
 					<include>client.ks</include>
 					<include>client.ts</include>
 					<include>*.properties</include>
+					<!-- 新增templates目录文件 -->
+					<include>templates/</include>
+					<include>*.ftl</include>
 				</includes>
 			</resource>
 		</resources>
@@ -368,6 +371,23 @@
 			<artifactId>elasticsearch</artifactId>
 			<version>1.7.0</version>
 		</dependency>
+		<!-- 引入模板引擎freemarker. -->
+		<dependency>
+	       <groupId>org.springframework.boot</groupId>
+	       <artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<!-- thymeleaf:Spring Boot默认模板引擎 -->
+		<dependency>
+	       <groupId>org.springframework.boot</groupId>
+	       <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!--jcaptcha -->
+		<dependency>
+			<groupId>com.octo.captcha</groupId>
+			<artifactId>jcaptcha-my</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
 		
 		<!-- <dependency>
 			<groupId>joda-time</groupId>
