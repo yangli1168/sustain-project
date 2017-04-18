@@ -150,8 +150,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.6.RELEASE</version>
-		<relativePath/>
+		<version>1.5.2.RELEASE</version>
 	</parent>
 	<dependencyManagement>
 		<dependencies>
@@ -386,6 +385,12 @@
 			<groupId>com.octo.captcha</groupId>
 			<artifactId>jcaptcha-my</artifactId>
 			<version>1.0</version>
+		</dependency>
+		<!-- 自定义tomcat EmbeddedServletContainerCustomizer -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-logging-juli</artifactId>
+			<version>7.0.64</version>
 		</dependency>
 		
 		

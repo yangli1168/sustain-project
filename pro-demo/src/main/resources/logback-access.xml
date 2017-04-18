@@ -1,0 +1,18 @@
+<configuration>
+	<property name="LOG_HOME" value="${CATALINA_HOME}/logs/prodemo.manager/" />
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+	<appender name="HTTP_APPENDER"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_HOME}/prodemo.access.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{HH:mm:ss.SSS} %fullRequest%n---------------------%n%fullResponse%n%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender-ref ref="HTTP_APPENDER" />
+</configuration>
