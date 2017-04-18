@@ -23,11 +23,10 @@ public class ElasticSearchServiceImpl implements ElasticSearchService{
 	@Override
 	public void putDoc(List<City> cities) throws CommonException {
 		try {
-			ElasticSearchUtil es = new ElasticSearchUtil(null, null);
 			if (null != cities) {
-				es.putDoc(cities);
+				ElasticSearchUtil.putDoc(cities);
 			}
-			es.putDoc(cityMapper.getCityList(null, null, null));
+			ElasticSearchUtil.putDoc(cityMapper.getCityList(null, null, null));
 			
 		} catch (Exception e) {
 			logger.info("fail to store the city info to es", e);
