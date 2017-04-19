@@ -1,6 +1,5 @@
 package net.xinqushi.util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.elasticsearch.action.admin.indices.refresh.RefreshAction;
@@ -10,27 +9,24 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.percolate.PercolateRequest;
 import org.elasticsearch.action.percolate.PercolateResponse;
 import org.elasticsearch.action.percolate.PercolateResponse.Match;
-import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 
+import net.xinqushi.common.constants.ESConstants;
 import net.xinqushi.orm.entity.City;
 import net.xinqushi.vo.Coordinate;
 
 /**
  * 
  * @author yangli
- * @date 2017年4月13日 - 下午9:45:11
  * @Description ElasticSearch工具类
  */
 public class ElasticSearchUtil {
@@ -44,32 +40,30 @@ public class ElasticSearchUtil {
 	
 	/**
 	 * 静态方法：返回client
-	 * @param clusterName null时默认为"Yang"
-	 * @param host null时默认为"127.0.0.1"
+	 * @param clusterName null时采用默认值
+	 * @param host null时采用默认值
 	 * @return
-	 * 2017年4月18日-下午3:36:33
 	 */
 	@SuppressWarnings("resource")
 	public static Client getESClient(String clusterName, String host) {
 		if (null == client) {
 			// 配置client
 			Settings settings = ImmutableSettings.settingsBuilder()
-					.put("cluster.name", clusterName == null ? "Yang" : clusterName)
+					.put("cluster.name", clusterName == null ? ESConstants.DEFAULT_CLUSTER_NAME : clusterName)
 					.put("client.transport.ping_timeout", "10s").build();
 			client = new TransportClient(settings)
-					.addTransportAddress(new InetSocketTransportAddress(host == null ? "127.0.0.1" : host, 9300));
+					.addTransportAddress(new InetSocketTransportAddress(host == null ? ESConstants.DEFAULT_HOST : host, 9300));
 		}
 		return client;
 	}
 	
 	/**
 	 * 静态方法：存入索引信息
-	 * @param clusterName null时默认为"Yang"
-	 * @param host null时默认为"127.0.0.1"
+	 * @param clusterName null时采用默认值
+	 * @param host null时采用默认值
 	 * @param indexName 索引名
 	 * @param queryCondition 自定义索引条件
 	 * @param dataSource 需要索引的数据源
-	 * 2017年4月18日-下午3:38:00
 	 */
 	public static void saveOrUpdateIndex(String clusterName, String host, String indexName, String queryCondition, byte[] dataSource ){
 		Client esClient = ElasticSearchUtil.getESClient(clusterName, host);
@@ -95,11 +89,10 @@ public class ElasticSearchUtil {
 	
 	/**
 	 * 
-	 * @param clusterName null时默认为"Yang"
-	 * @param host null时默认为"127.0.0.1"
+	 * @param clusterName null时采用默认值
+	 * @param host null时采用默认值
 	 * @param indexName 索引名
 	 * @param queryCondition 自定义索引条件
-	 * 2017年4月18日-下午4:09:31
 	 */
 	public static void deleteIndex(String clusterName, String host, String indexName, String queryCondition){
 		Client esClient = ElasticSearchUtil.getESClient(clusterName, host);
@@ -119,9 +112,7 @@ public class ElasticSearchUtil {
 		}
 	}
 	
-	private static final String CITY_AREA_QUERY_TEMPLATE = "{\"doc\":{\"location\":{\"lat\":%f,\"lon\":%f}}}";
 	private static final String CITY_AREA_INDEX_NAME = "uto-city-area";
-	private static final String UPDATE_CITY_AREA_PERCOLATOR_TEMPLATE = "{\"query\":{\"filtered\":{\"query\":{\"match_all\":{}},\"filter\":{\"geo_polygon\":{\"location\":{\"points\":[]}}}}}}";
 	private static final TypeReference<List<Coordinate>> coordinatesTypeRef = new TypeReference<List<Coordinate>>() {
 	}; 
 	
@@ -134,13 +125,13 @@ public class ElasticSearchUtil {
 		String param = "[{\"lat\":28.96593,\"lon\":105.44397},{\"lat\":28.964866542710855,\"lon\":105.45612537243667},{\"lat\":28.961708483455013,\"lon\":105.46791141003278},{\"lat\":28.95655177826491,\"lon\":105.47896999999999},{\"lat\":28.94955311101833,\"lon\":105.48896513267805},{\"lat\":28.940925132678057,\"lon\":105.49759311101832},{\"lat\":28.93093,\"lon\":105.50459177826491},{\"lat\":28.919871410032798,\"lon\":105.50974848345501},{\"lat\":28.908085372436684,\"lon\":105.51290654271085},{\"lat\":28.89593,\"lon\":105.51396999999999},{\"lat\":28.883774627563316,\"lon\":105.51290654271085},{\"lat\":28.871988589967202,\"lon\":105.50974848345501},{\"lat\":28.86093,\"lon\":105.50459177826491},{\"lat\":28.850934867321943,\"lon\":105.49759311101832},{\"lat\":28.84230688898167,\"lon\":105.48896513267805},{\"lat\":28.83530822173509,\"lon\":105.47896999999999},{\"lat\":28.830151516544987,\"lon\":105.46791141003278},{\"lat\":28.826993457289145,\"lon\":105.45612537243667},{\"lat\":28.82593,\"lon\":105.44397},{\"lat\":28.826993457289145,\"lon\":105.43181462756331},{\"lat\":28.830151516544987,\"lon\":105.4200285899672},{\"lat\":28.83530822173509,\"lon\":105.40897},{\"lat\":28.84230688898167,\"lon\":105.39897486732194},{\"lat\":28.850934867321943,\"lon\":105.39034688898167},{\"lat\":28.86093,\"lon\":105.38334822173508},{\"lat\":28.871988589967202,\"lon\":105.37819151654497},{\"lat\":28.883774627563316,\"lon\":105.37503345728913},{\"lat\":28.89593,\"lon\":105.37397},{\"lat\":28.908085372436684,\"lon\":105.37503345728913},{\"lat\":28.919871410032798,\"lon\":105.37819151654497},{\"lat\":28.93093,\"lon\":105.38334822173508},{\"lat\":28.940925132678057,\"lon\":105.39034688898167},{\"lat\":28.94955311101833,\"lon\":105.39897486732194},{\"lat\":28.95655177826491,\"lon\":105.40897},{\"lat\":28.961708483455013,\"lon\":105.4200285899672},{\"lat\":28.964866542710855,\"lon\":105.43181462756331}]";
 		List<Coordinate> source = JSON.parseObject(param, coordinatesTypeRef);
 		
-		ElasticSearchUtil.saveOrUpdateIndex(null, null, "city-area", new StringBuilder().append("qinyun").append(".").append("888").toString(), 
+		ElasticSearchUtil.saveOrUpdateIndex(null, null, "city-area-yang", new StringBuilder().append("qinyun").append(".").append("888").toString(), 
 				ElasticSearchUtil.createSource(source));
 	}
 	
 	public static byte[] createSource(List<Coordinate> source){
 		
-		JSONObject jo = JSON.parseObject(UPDATE_CITY_AREA_PERCOLATOR_TEMPLATE);
+		JSONObject jo = JSON.parseObject(ESConstants.UPDATE_CITY_AREA_PERCOLATOR_TEMPLATE);
 
 		JSONArray points = jo.getJSONObject("query").getJSONObject("filtered").getJSONObject("filter")
 				.getJSONObject("geo_polygon").getJSONObject("location").getJSONArray("points");
@@ -185,7 +176,7 @@ public class ElasticSearchUtil {
 	
 	public static void getAreaInfo(double lat, double lon){
 		client = ElasticSearchUtil.getESClient("utoo-es-test", "112.74.133.11");
-		String source = String.format(CITY_AREA_QUERY_TEMPLATE, lat, lon);
+		String source = String.format(ESConstants.CITY_AREA_QUERY_TEMPLATE, lat, lon);
 		int result = 0;
 		
 		PercolateRequest percolateRequest = new PercolateRequest();
@@ -263,16 +254,5 @@ public class ElasticSearchUtil {
 		IndexResponse response = builder.execute().actionGet();
 		String id = response.getId();
 		return id;
-	}
-
-	public String getInfo() {
-		String query = "{\"name\":\"测\"}";
-		SearchResponse response = client.prepareSearch("city").setQuery("name").setFrom(0).setSize(5).setExplain(true)
-				.execute().actionGet();
-		SearchHits hits = response.getHits();
-		for (SearchHit searchHit : hits) {
-			System.out.println(searchHit.getId() + " -> " + searchHit.getIndex() + " -> " + searchHit.getFields());
-		}
-		return null;
 	}
 }
