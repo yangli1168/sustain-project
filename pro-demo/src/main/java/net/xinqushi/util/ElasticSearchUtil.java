@@ -112,21 +112,22 @@ public class ElasticSearchUtil {
 		}
 	}
 	
-	private static final String CITY_AREA_INDEX_NAME = "uto-city-area";
 	private static final TypeReference<List<Coordinate>> coordinatesTypeRef = new TypeReference<List<Coordinate>>() {
 	}; 
 	
 	public static void main(String[] args) {
 
-//		ElasticSearchUtil.getAreaInfo(30.665037, 104.073084);
+		ElasticSearchUtil.getAreaInfo(28.9, 105.4);
+		ElasticSearchUtil.getAreaInfo(20, 20);
+		
 //		esUtil.getResvInfo(30.665037, 104.073084);
 		
 		
-		String param = "[{\"lat\":28.96593,\"lon\":105.44397},{\"lat\":28.964866542710855,\"lon\":105.45612537243667},{\"lat\":28.961708483455013,\"lon\":105.46791141003278},{\"lat\":28.95655177826491,\"lon\":105.47896999999999},{\"lat\":28.94955311101833,\"lon\":105.48896513267805},{\"lat\":28.940925132678057,\"lon\":105.49759311101832},{\"lat\":28.93093,\"lon\":105.50459177826491},{\"lat\":28.919871410032798,\"lon\":105.50974848345501},{\"lat\":28.908085372436684,\"lon\":105.51290654271085},{\"lat\":28.89593,\"lon\":105.51396999999999},{\"lat\":28.883774627563316,\"lon\":105.51290654271085},{\"lat\":28.871988589967202,\"lon\":105.50974848345501},{\"lat\":28.86093,\"lon\":105.50459177826491},{\"lat\":28.850934867321943,\"lon\":105.49759311101832},{\"lat\":28.84230688898167,\"lon\":105.48896513267805},{\"lat\":28.83530822173509,\"lon\":105.47896999999999},{\"lat\":28.830151516544987,\"lon\":105.46791141003278},{\"lat\":28.826993457289145,\"lon\":105.45612537243667},{\"lat\":28.82593,\"lon\":105.44397},{\"lat\":28.826993457289145,\"lon\":105.43181462756331},{\"lat\":28.830151516544987,\"lon\":105.4200285899672},{\"lat\":28.83530822173509,\"lon\":105.40897},{\"lat\":28.84230688898167,\"lon\":105.39897486732194},{\"lat\":28.850934867321943,\"lon\":105.39034688898167},{\"lat\":28.86093,\"lon\":105.38334822173508},{\"lat\":28.871988589967202,\"lon\":105.37819151654497},{\"lat\":28.883774627563316,\"lon\":105.37503345728913},{\"lat\":28.89593,\"lon\":105.37397},{\"lat\":28.908085372436684,\"lon\":105.37503345728913},{\"lat\":28.919871410032798,\"lon\":105.37819151654497},{\"lat\":28.93093,\"lon\":105.38334822173508},{\"lat\":28.940925132678057,\"lon\":105.39034688898167},{\"lat\":28.94955311101833,\"lon\":105.39897486732194},{\"lat\":28.95655177826491,\"lon\":105.40897},{\"lat\":28.961708483455013,\"lon\":105.4200285899672},{\"lat\":28.964866542710855,\"lon\":105.43181462756331}]";
-		List<Coordinate> source = JSON.parseObject(param, coordinatesTypeRef);
-		
-		ElasticSearchUtil.saveOrUpdateIndex(null, null, "city-area-yang", new StringBuilder().append("qinyun").append(".").append("888").toString(), 
-				ElasticSearchUtil.createSource(source));
+//		String param = "[{\"lat\":28.96593,\"lon\":105.44397},{\"lat\":28.964866542710855,\"lon\":105.45612537243667},{\"lat\":28.961708483455013,\"lon\":105.46791141003278},{\"lat\":28.95655177826491,\"lon\":105.47896999999999},{\"lat\":28.94955311101833,\"lon\":105.48896513267805},{\"lat\":28.940925132678057,\"lon\":105.49759311101832},{\"lat\":28.93093,\"lon\":105.50459177826491},{\"lat\":28.919871410032798,\"lon\":105.50974848345501},{\"lat\":28.908085372436684,\"lon\":105.51290654271085},{\"lat\":28.89593,\"lon\":105.51396999999999},{\"lat\":28.883774627563316,\"lon\":105.51290654271085},{\"lat\":28.871988589967202,\"lon\":105.50974848345501},{\"lat\":28.86093,\"lon\":105.50459177826491},{\"lat\":28.850934867321943,\"lon\":105.49759311101832},{\"lat\":28.84230688898167,\"lon\":105.48896513267805},{\"lat\":28.83530822173509,\"lon\":105.47896999999999},{\"lat\":28.830151516544987,\"lon\":105.46791141003278},{\"lat\":28.826993457289145,\"lon\":105.45612537243667},{\"lat\":28.82593,\"lon\":105.44397},{\"lat\":28.826993457289145,\"lon\":105.43181462756331},{\"lat\":28.830151516544987,\"lon\":105.4200285899672},{\"lat\":28.83530822173509,\"lon\":105.40897},{\"lat\":28.84230688898167,\"lon\":105.39897486732194},{\"lat\":28.850934867321943,\"lon\":105.39034688898167},{\"lat\":28.86093,\"lon\":105.38334822173508},{\"lat\":28.871988589967202,\"lon\":105.37819151654497},{\"lat\":28.883774627563316,\"lon\":105.37503345728913},{\"lat\":28.89593,\"lon\":105.37397},{\"lat\":28.908085372436684,\"lon\":105.37503345728913},{\"lat\":28.919871410032798,\"lon\":105.37819151654497},{\"lat\":28.93093,\"lon\":105.38334822173508},{\"lat\":28.940925132678057,\"lon\":105.39034688898167},{\"lat\":28.94955311101833,\"lon\":105.39897486732194},{\"lat\":28.95655177826491,\"lon\":105.40897},{\"lat\":28.961708483455013,\"lon\":105.4200285899672},{\"lat\":28.964866542710855,\"lon\":105.43181462756331}]";
+//		List<Coordinate> source = JSON.parseObject(param, coordinatesTypeRef);
+//		
+//		ElasticSearchUtil.saveOrUpdateIndex(null, null, "city-area-yang", new StringBuilder().append("qinyun").append(".").append("888").toString(), 
+//				ElasticSearchUtil.createSource(source));
 	}
 	
 	public static byte[] createSource(List<Coordinate> source){
@@ -175,12 +176,12 @@ public class ElasticSearchUtil {
 	}
 	
 	public static void getAreaInfo(double lat, double lon){
-		client = ElasticSearchUtil.getESClient("utoo-es-test", "112.74.133.11");
+		client = ElasticSearchUtil.getESClient(null, null);
 		String source = String.format(ESConstants.CITY_AREA_QUERY_TEMPLATE, lat, lon);
 		int result = 0;
 		
 		PercolateRequest percolateRequest = new PercolateRequest();
-		percolateRequest.indices(CITY_AREA_INDEX_NAME);
+		percolateRequest.indices("city-area-yang");
 		percolateRequest.documentType("position-validate");
 		percolateRequest.source(source);
 		percolateRequest.listenerThreaded(false);
