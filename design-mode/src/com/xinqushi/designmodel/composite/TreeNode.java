@@ -1,4 +1,4 @@
-package com.demo.mode.composite;
+package com.xinqushi.designmodel.composite;
 
 import java.util.Enumeration;
 import java.util.Vector;

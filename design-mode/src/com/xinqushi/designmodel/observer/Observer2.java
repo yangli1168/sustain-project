@@ -1,4 +1,4 @@
-package com.demo.mode.observer;
+package com.xinqushi.designmodel.observer;
 
 public class Observer2 implements Observer{
 

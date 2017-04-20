@@ -1,4 +1,4 @@
-package com.demo.mode.composite;
+package com.xinqushi.designmodel.composite;
 
 public class Tree {
 	static TreeNode root = null;

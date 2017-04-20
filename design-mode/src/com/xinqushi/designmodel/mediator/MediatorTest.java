@@ -1,4 +1,4 @@
-package com.demo.mode.mediator;
+package com.xinqushi.designmodel.mediator;
 
 public class MediatorTest {
 	public static void main(String[] args) {

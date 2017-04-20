@@ -1,4 +1,4 @@
-package com.demo.mode.facade;
+package com.xinqushi.designmodel.facade;
 
 public class Computer {
 	private CPU cpu;

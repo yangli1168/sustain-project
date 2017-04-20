@@ -1,4 +1,4 @@
-package com.demo.mode.adapter;
+package com.xinqushi.designmodel.adapter;
 
 public class SourceSub1 extends AbstractWrapper{
 

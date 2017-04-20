@@ -1,4 +1,4 @@
-package com.demo.mode.template;
+package com.xinqushi.designmodel.template;
 
 public abstract class AbstractCalculator {
 	/* 主方法，实现对本类其它方法的调用 */

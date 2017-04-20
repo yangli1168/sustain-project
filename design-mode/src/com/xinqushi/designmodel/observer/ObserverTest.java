@@ -1,4 +1,4 @@
-package com.demo.mode.observer;
+package com.xinqushi.designmodel.observer;
 
 public class ObserverTest {
 	public static void main(String[] args) {

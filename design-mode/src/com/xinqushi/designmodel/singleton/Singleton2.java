@@ -1,4 +1,4 @@
-package com.demo.mode.singleton;
+package com.xinqushi.designmodel.singleton;
 
 public class Singleton2 {
 	/* 私有构造方法，防止被实例化 */

@@ -1,4 +1,4 @@
-package com.demo.mode.memento;
+package com.xinqushi.designmodel.memento;
 
 public class Memento {
 	private String value;

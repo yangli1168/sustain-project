@@ -1,4 +1,4 @@
-package com.demo.mode.flyweight;
+package com.xinqushi.designmodel.flyweight;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

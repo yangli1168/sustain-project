@@ -1,4 +1,4 @@
-package com.demo.mode.strategy;
+package com.xinqushi.designmodel.strategy;
 
 public class StrategyTest {
 	public static void main(String[] args) {

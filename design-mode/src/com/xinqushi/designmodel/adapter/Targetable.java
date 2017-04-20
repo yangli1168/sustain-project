@@ -1,4 +1,4 @@
-package com.demo.mode.adapter;
+package com.xinqushi.designmodel.adapter;
 
 public interface Targetable {
 	/* 与原类中的方法相同 */

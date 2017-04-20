@@ -1,4 +1,4 @@
-package com.demo.mode.state;
+package com.xinqushi.designmodel.state;
 
 public class State {
 	private String value;

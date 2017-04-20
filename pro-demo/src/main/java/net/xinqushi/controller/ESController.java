@@ -44,4 +44,9 @@ public class ESController {
 			return RestResponse.build(e.getStatusCode(), e.getMessage());
 		}
 	}
+	
+	@RequestMapping(value = "/test")
+	public RestResponse test2(){
+		return RestResponse.build(200, "欢迎测试springboot热部署功能");
+	}
 }

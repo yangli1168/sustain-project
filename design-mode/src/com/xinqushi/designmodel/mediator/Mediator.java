@@ -1,4 +1,4 @@
-package com.demo.mode.mediator;
+package com.xinqushi.designmodel.mediator;
 
 public interface Mediator {
 	public void createMediator();

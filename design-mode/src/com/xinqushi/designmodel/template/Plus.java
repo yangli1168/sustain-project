@@ -1,4 +1,4 @@
-package com.demo.mode.template;
+package com.xinqushi.designmodel.template;
 
 public class Plus extends AbstractCalculator{
 

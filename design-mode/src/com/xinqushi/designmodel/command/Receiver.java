@@ -1,4 +1,4 @@
-package com.demo.mode.command;
+package com.xinqushi.designmodel.command;
 
 public class Receiver {
 	public void action(){

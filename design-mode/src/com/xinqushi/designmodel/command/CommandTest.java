@@ -1,4 +1,4 @@
-package com.demo.mode.command;
+package com.xinqushi.designmodel.command;
 
 public class CommandTest {
 	public static void main(String[] args) {

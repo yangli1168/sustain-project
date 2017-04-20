@@ -1,4 +1,4 @@
-package com.demo.mode.observer;
+package com.xinqushi.designmodel.observer;
 
 public interface Subject {
 	/* 增加观察者 */

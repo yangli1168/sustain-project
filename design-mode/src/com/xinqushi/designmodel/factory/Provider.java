@@ -1,4 +1,4 @@
-package com.demo.mode.factory;
+package com.xinqushi.designmodel.factory;
 
 public interface Provider {
 	public Sender produce();

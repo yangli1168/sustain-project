@@ -1,4 +1,4 @@
-package com.demo.mode.decorator2proxy;
+package com.xinqushi.designmodel.decorator2proxy;
 
 public class Decorator implements Sourceable{
 	private Sourceable source;

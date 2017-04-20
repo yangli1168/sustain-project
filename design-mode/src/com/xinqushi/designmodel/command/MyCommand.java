@@ -1,4 +1,4 @@
-package com.demo.mode.command;
+package com.xinqushi.designmodel.command;
 
 public class MyCommand implements Command {
 	private Receiver receiver;

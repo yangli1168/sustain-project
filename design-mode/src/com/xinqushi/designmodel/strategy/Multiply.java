@@ -1,4 +1,4 @@
-package com.demo.mode.strategy;
+package com.xinqushi.designmodel.strategy;
 
 public class Multiply extends AbstractCalculator implements ICalculator {
 

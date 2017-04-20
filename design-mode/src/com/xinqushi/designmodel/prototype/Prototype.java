@@ -1,4 +1,4 @@
-package com.demo.mode.prototype;
+package com.xinqushi.designmodel.prototype;
 
 import java.io.*;
 

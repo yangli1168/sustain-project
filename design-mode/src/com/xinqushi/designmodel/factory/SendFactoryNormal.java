@@ -1,4 +1,4 @@
-package com.demo.mode.factory;
+package com.xinqushi.designmodel.factory;
 
 public class SendFactoryNormal {
 	public Sender produce(String type) {

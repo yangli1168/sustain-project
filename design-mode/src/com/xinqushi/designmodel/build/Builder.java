@@ -1,4 +1,4 @@
-package com.demo.mode.build;
+package com.xinqushi.designmodel.build;
 
 import java.util.ArrayList;
 import java.util.List;

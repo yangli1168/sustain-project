@@ -1,4 +1,4 @@
-package com.demo.mode.singleton;
+package com.xinqushi.designmodel.singleton;
 
 public class Singleton {
 

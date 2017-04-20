@@ -1,4 +1,4 @@
-package com.demo.mode.strategy;
+package com.xinqushi.designmodel.strategy;
 
 public interface ICalculator {
 	public int calculate(String exp);

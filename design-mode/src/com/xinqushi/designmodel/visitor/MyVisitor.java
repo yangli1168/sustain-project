@@ -1,4 +1,4 @@
-package com.demo.mode.visitor;
+package com.xinqushi.designmodel.visitor;
 
 public class MyVisitor implements Visitor{
 

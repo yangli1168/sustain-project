@@ -1,4 +1,4 @@
-package com.demo.mode.bridge;
+package com.xinqushi.designmodel.bridge;
 
 public interface Sourceable {
 	public void method();
