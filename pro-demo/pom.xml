@@ -2,8 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.net</groupId>
   <artifactId>pro-demo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <version>2017.4.21</version>
+  <packaging>jar</packaging>
   
 	<!-- 版本管理 -->
 	<properties>
@@ -62,6 +62,10 @@
 				<configuration>
 					<mainClass>net.xinqushi.Application</mainClass>
 					<layout>ZIP</layout>
+					
+					<!-- 热部署配置1开始：如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
+					<fork>true</fork>
+					<!-- 热部署配置1结束 -->
 				</configuration>
 				<executions>
 					<execution>
@@ -392,15 +396,15 @@
 			<artifactId>tomcat-embed-logging-juli</artifactId>
 			<version>7.0.64</version>
 		</dependency>
-		<!-- 热部署 -->
+		
+		<!-- 热部署配置2开始 -->
 		<dependency>  
 		    <groupId>org.springframework.boot</groupId>  
 		    <artifactId>spring-boot-devtools</artifactId>  
+		    <!-- optional=true,依赖不会传递，该项目依赖devtools；之后依赖myboot项目的项目如果想要使用devtools，需要重新引入 -->  
 		    <optional>true</optional>
-		    <!-- optional=true,依赖不会传递，该项目依赖devtools；
-		    	之后依赖myboot项目的项目如果想要使用devtools，需要重新引入 -->  
 		</dependency> 
-		
+		<!-- 热部署配置2结束 -->
 		
 		<!-- <dependency>
 			<groupId>joda-time</groupId>
