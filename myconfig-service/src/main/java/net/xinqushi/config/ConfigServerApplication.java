@@ -1,4 +1,4 @@
-package com.utoo.config;
+package net.xinqushi.config;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
