@@ -1,0 +1,9 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: xinqushi-discovery
+  cloud:
+    config:
+      uri: http://localhost:8888
+      failFast: true

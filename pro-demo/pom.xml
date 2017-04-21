@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.net</groupId>
   <artifactId>pro-demo</artifactId>
-  <version>2017.4.21</version>
+  <version>2017.4.21.1</version>
   <packaging>jar</packaging>
   
 	<!-- 版本管理 -->
