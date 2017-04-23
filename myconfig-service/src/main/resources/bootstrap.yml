@@ -12,8 +12,8 @@ spring:
         git:
           #uri: git@github.com:yangli1168/config-repo.git
           uri: https://github.com/yangli1168/config-repo.git
-          username: uto_deploy
-          password: uto1122333
+          username: yangli1168
+          password: 0.yangli1168
 server:
   port: 8888
 management:
