@@ -28,6 +28,9 @@ public class Application {
 	}
 	
 	public static void main(String[] args) {
+		/** 热部署配置3开始:新增监控目录*/
+//		System.setProperty("spring.devtools.restart.additional-paths", "/target");
+		/** 热部署配置3结束*/
 		SpringApplication.run(Application.class, args);
 	}
 }

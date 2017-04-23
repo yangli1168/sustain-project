@@ -1,0 +1,5 @@
+/target/
+/logs/
+/CATALINA_HOME_IS_UNDEFINED/
+/.settings
+.classpath

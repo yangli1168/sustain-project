@@ -1,0 +1,20 @@
+info:
+  component: Config Server
+spring:
+  application:
+    name: ConfigServer
+  jmx:
+    default_domain: cloud.config.server
+  cloud:
+    config:
+      label: jms.auth
+      server:
+        git:
+          #uri: git@github.com:yangli1168/config-repo.git
+          uri: https://github.com/yangli1168/config-repo.git
+          username: uto_deploy
+          password: uto1122333
+server:
+  port: 8888
+management:
+  context_path: /admin

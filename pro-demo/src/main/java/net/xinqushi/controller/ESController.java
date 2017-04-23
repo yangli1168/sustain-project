@@ -47,6 +47,6 @@ public class ESController {
 	
 	@RequestMapping(value = "/test")
 	public RestResponse test2(){
-		return RestResponse.build(200, "欢迎测试springboot热部署功能");
+		return RestResponse.build(200, "欢迎测试springboot热部署功能[修改.v2]");
 	}
 }
