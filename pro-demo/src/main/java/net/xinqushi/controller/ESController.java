@@ -59,7 +59,12 @@ public class ESController {
 								@PathVariable("type")String type,
 								@PathVariable("id")String id){
 		try {
-			return RestResponse.ok(elasticSearchService.getIndexById(index, type, id));
+			String str = elasticSearchService.getIndexById(index, type, id);
+			City city = JSON.parseObject(str, City.class);
+			if (null == city) {
+				throw new CommonException("索引中无此记录");
+			}
+			return RestResponse.ok(city);
 		} catch (CommonException e) {
 			return RestResponse.build(e.getStatusCode(), e.getMessage());
 		}
