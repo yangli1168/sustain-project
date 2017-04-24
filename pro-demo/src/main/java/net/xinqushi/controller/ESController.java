@@ -2,8 +2,12 @@ package net.xinqushi.controller;
 
 import java.util.List;
 
+import javax.ws.rs.Path;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,4 +53,16 @@ public class ESController {
 	public RestResponse test2(){
 		return RestResponse.build(200, "欢迎测试springboot热部署功能[修改.v2]");
 	}
+	
+	@RequestMapping(value = "/get/{index}/{type}/{id}", method = RequestMethod.GET)
+	public RestResponse gerInfo(@PathVariable("index")String index,
+								@PathVariable("type")String type,
+								@PathVariable("id")String id){
+		try {
+			return RestResponse.ok(elasticSearchService.getIndexById(index, type, id));
+		} catch (CommonException e) {
+			return RestResponse.build(e.getStatusCode(), e.getMessage());
+		}
+	}
+	
 }
