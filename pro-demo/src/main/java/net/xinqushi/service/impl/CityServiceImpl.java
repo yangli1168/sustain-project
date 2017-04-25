@@ -14,6 +14,7 @@ import net.xinqushi.common.constants.CacheConstants;
 import net.xinqushi.common.constants.TypeReferenceConstants;
 import net.xinqushi.common.enums.ManagementEventType;
 import net.xinqushi.common.exceptions.CommonException;
+import net.xinqushi.jms.ManagementEventMarker;
 import net.xinqushi.orm.entity.City;
 import net.xinqushi.orm.mapper.CityMapper;
 import net.xinqushi.service.CityService;
@@ -26,6 +27,9 @@ public class CityServiceImpl implements CityService {
 
 	@Autowired
 	private CityMapper cityMapper;
+	
+	@Autowired
+	private ManagementEventMarker managementEventMarker;
 
 	/** 计算分页初始 */
 	private int calcPageStart(int pageSize, int pageNum) {
@@ -59,7 +63,8 @@ public class CityServiceImpl implements CityService {
 		try {
 			cityMapper.updateByPrimaryKeySelective(mCity);
 			//将更新标志存入缓存用于更新任务
-			JedisPoolUtil.getJedis().hset(CacheConstants.CITY_PARAM_UPDATED, ManagementEventType.CITY_LIST_UPDATED.name(), mCity.getId() + "");
+			managementEventMarker.appendManagmentEvent(CacheConstants.CITY_PARAM_UPDATED, ManagementEventType.CITY_LIST_UPDATED, mCity.getId() + "");
+//			JedisPoolUtil.getJedis().hset(CacheConstants.CITY_PARAM_UPDATED, ManagementEventType.CITY_LIST_UPDATED.name(), mCity.getId() + "");
 		} catch (Exception e) {
 			logger.info("修改城市信息失败", e);
 			throw new CommonException("修改城市信息失败");
