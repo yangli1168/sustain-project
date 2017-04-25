@@ -1,5 +1,6 @@
 package net.xinqushi.jms;
 
+import javax.annotation.PostConstruct;
 import javax.jms.Connection;
 import javax.jms.Destination;
 import javax.jms.JMSException;
@@ -11,6 +12,7 @@ import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import net.xinqushi.common.constants.JMSConstants;
 
@@ -19,9 +21,19 @@ import net.xinqushi.common.constants.JMSConstants;
  * @author yangli
  * 2017年4月24日-下午3:32:07
  */
+//@Component
 public class MessageReceiver {
 	
 	private static Logger logger = LoggerFactory.getLogger(MessageReceiver.class);
+	
+//	@PostConstruct
+	public void init(){
+		try {
+			new MessageReceiver().receiveMessage();
+		} catch (Exception e) {
+			logger.error("fail to init messagereceiver", e);
+		}
+	}
 	
 	public void receiveMessage(){
 		Connection connection = null;
@@ -64,7 +76,7 @@ public class MessageReceiver {
 			if (message instanceof TextMessage) {
 				TextMessage textMessage = (TextMessage) message;
 				String msg = textMessage.getText();
-				System.out.println("Received: " + msg);
+				System.err.println("Received: " + msg);
 			}
 		} catch (Exception e) {
 			logger.error("fail while run onMessage", e);
