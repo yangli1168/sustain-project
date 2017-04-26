@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 
@@ -15,9 +16,9 @@ import net.xinqushi.orm.entity.City;
 import net.xinqushi.orm.mapper.CityMapper;
 import net.xinqushi.util.JedisPoolUtil;
 import redis.clients.jedis.Jedis;
-
+@Component
 public class DataSynchronismTask extends QuartzJobBean{
-	private static final Logger logger = LoggerFactory.getLogger(DataSynchronismTask.class);
+	private static Logger logger = LoggerFactory.getLogger(DataSynchronismTask.class);
 	
 	private CityMapper cityMapper = null;
 	
@@ -33,9 +34,11 @@ public class DataSynchronismTask extends QuartzJobBean{
 	
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+		Long startTime = null;
 		
 		if (logger.isInfoEnabled()) {
-			logger.info("数据同步任务开始执行----" + System.currentTimeMillis() + "------");
+			startTime = System.currentTimeMillis();
+			logger.info("定时任务：'数据同步'开始执行----" + startTime + "------");
 		}
 		
 		try {
@@ -44,9 +47,9 @@ public class DataSynchronismTask extends QuartzJobBean{
 			
 			List<City> cityList = cityMapper.getCityList(null, null, null);
 			String set = jedis.set("city:list:test", JSON.toJSONString(cityList));
-			logger.info(set);
+			logger.info("------数据同步任务执行完成, 耗时" + (System.currentTimeMillis() - startTime) + "毫秒------");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("fail to synchronism data with redis", e);
 		}
 	}
 	

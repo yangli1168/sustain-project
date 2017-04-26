@@ -91,7 +91,7 @@ public class CityServiceImpl implements CityService {
 		} else {
 			for(int i=0; i<cities.size(); i++){
 				City city = cities.get(i);
-				if (i >= start && i <= pageSize) {
+				if (i >= start && i <= start + pageSize - 1) {
 					currentList.add(city);
 				}
 			}
