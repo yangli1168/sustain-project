@@ -30,7 +30,7 @@ public class JedisPoolUtil {
 			jedisPool = new JedisPool(config, REDIS_HOST, REDIS_PORT, 2000, REDIS_PASSWORD);
 			jedis = jedisPool.getResource();
 			//设置jedis默认的redis数据库表
-			jedis.select(8);
+//			jedis.select(8);
 		} catch (Exception e) {
 			logger.error("Fail to initialize jedis pool", e);
 			try {

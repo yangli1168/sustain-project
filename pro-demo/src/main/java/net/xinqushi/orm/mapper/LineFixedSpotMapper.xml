@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.xinqushi.orm.mapper.LineFixedSpotMapper" >
+  <resultMap id="BaseResultMap" type="net.xinqushi.orm.entity.LineFixedSpot" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="lineId" property="lineId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="ruleType" property="ruleType" jdbcType="VARCHAR" />
+    <result column="cityId" property="cityId" jdbcType="INTEGER" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="startTime" property="startTime" jdbcType="BIGINT" />
+    <result column="endTime" property="endTime" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="VARCHAR" typeHandler="org.apache.ibatis.type.EnumTypeHandler" />
+    <result column="createTime" property="createTime" jdbcType="BIGINT" />
+    <result column="srcCityId" property="srcCityId" jdbcType="INTEGER" />
+    <result column="dstCityId" property="dstCityId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, lineId, name, ruleType, cityId, latitude, longitude, startTime, endTime, status, 
+    createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_v2_line_fixed_spot
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_v2_line_fixed_spot
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="net.xinqushi.orm.entity.LineFixedSpot" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tbl_v2_line_fixed_spot (lineId, name, ruleType, 
+      cityId, latitude, longitude, 
+      startTime, endTime, status, 
+      createTime)
+    values (#{lineId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{ruleType,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=INTEGER}, #{latitude,jdbcType=DOUBLE}, #{longitude,jdbcType=DOUBLE}, 
+      #{startTime,jdbcType=BIGINT}, #{endTime,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler}, 
+      #{createTime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="net.xinqushi.orm.entity.LineFixedSpot" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tbl_v2_line_fixed_spot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lineId != null" >
+        lineId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="ruleType != null" >
+        ruleType,
+      </if>
+      <if test="cityId != null" >
+        cityId,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="startTime != null" >
+        startTime,
+      </if>
+      <if test="endTime != null" >
+        endTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lineId != null" >
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleType != null" >
+        #{ruleType,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.xinqushi.orm.entity.LineFixedSpot" >
+    update tbl_v2_line_fixed_spot
+    <set >
+      <if test="lineId != null" >
+        lineId = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleType != null" >
+        ruleType = #{ruleType,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        cityId = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="startTime != null" >
+        startTime = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        endTime = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.xinqushi.orm.entity.LineFixedSpot" >
+    update tbl_v2_line_fixed_spot
+    set lineId = #{lineId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      ruleType = #{ruleType,jdbcType=VARCHAR},
+      cityId = #{cityId,jdbcType=INTEGER},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      startTime = #{startTime,jdbcType=BIGINT},
+      endTime = #{endTime,jdbcType=BIGINT},
+      status = #{status,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+      createTime = #{createTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+	<select id="list" resultType="net.xinqushi.orm.entity.LineFixedSpot">
+		select
+		t1.id,t1.name,t1.ruleType,t1.startTIme,t1.endTime,t2.name as
+		cityName
+		from
+		tbl_v2_line_fixed_spot t1 inner join tbl_v2_city t2
+		on
+		t1.cityId=t2.id
+		where t1.lineId = #{id,jdbcType=INTEGER}
+		and
+		t1.status='VALID'
+		<if test="ruleType!=''">
+			and t1.ruleType=#{ruleType,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="serachByCoordinate" resultType="net.xinqushi.orm.entity.LineFixedSpot">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_v2_line_fixed_spot
+		where latitude = #{latitude,jdbcType=DOUBLE} and
+		longitude = #{longitude,jdbcType=DOUBLE}
+	</select>
+
+	<update id="invalidateExpiredFixedSpot">
+		update tbl_v2_line_fixed_spot
+		set status = 'INVALID'
+		where lineId = #{lineId,jdbcType=INTEGER} and ruleType = 'TIME' and status = 'VALID' and endTime &lt;= #{currentTime,jdbcType=BIGINT}
+	</update>
+	
+	<select id="getSpotsByLine" resultMap="BaseResultMap" >
+		select
+		spot.id, spot.lineId, spot.name, spot.ruleType, spot.cityId, 
+		spot.latitude, spot.longitude, spot.startTime, spot.endTime, 
+		line.srcCityId, line.dstCityId 
+		from tbl_v2_line_fixed_spot spot, tbl_v2_line line
+		where spot.lineId = #{lineId,jdbcType=INTEGER} and spot.status = 'VALID' 
+			and spot.lineId = line.id
+		order by spot.ruleType, spot.cityId asc, spot.startTime asc
+	</select>
+	
+</mapper>

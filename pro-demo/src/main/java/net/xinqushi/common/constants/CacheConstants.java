@@ -10,4 +10,7 @@ public class CacheConstants {
 	
 	/** 城市列表key:缓存所有非删除状态城市*/
 	public static final String CITY_KEY = "city:list";
+	
+	/** 线路规定上下车地点*/
+	public static final String LINE_FIXED_SPOT_KEY = "line.fixed.spots";
 }
