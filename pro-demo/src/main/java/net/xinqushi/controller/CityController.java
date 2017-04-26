@@ -1,5 +1,7 @@
 package net.xinqushi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,7 @@ import net.xinqushi.common.exceptions.CommonException;
 import net.xinqushi.common.response.RestResponse;
 import net.xinqushi.orm.entity.City;
 import net.xinqushi.service.CityService;
+import net.xinqushi.util.Pair;
 
 /**
  * 城市管理
@@ -40,13 +43,15 @@ public class CityController {
 		}
 	}
 	
-	@RequestMapping(value = "/cache/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/cache/list", method = RequestMethod.POST)
 	public RestResponse getCityListFromRedis(@RequestParam(value = "cityName", required = false)String cityName,
 			@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "20")Integer pageSize){
 		RestResponse response = new RestResponse();
 		try {
-			response.setData(cityService.getCityListFromRedis(cityName, pageNum, pageSize));
+			Pair<List<City>, Integer> pageInfo = cityService.getCityListFromRedis(cityName, pageNum, pageSize);
+			response.setAppendix(pageInfo.getValue2());
+			response.setData(pageInfo.getValue1());
 			return response;
 		} catch (CommonException e) {
 			return RestResponse.build(e.getStatusCode(), e.getMessage());

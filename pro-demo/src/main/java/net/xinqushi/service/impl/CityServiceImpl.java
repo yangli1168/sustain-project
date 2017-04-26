@@ -19,6 +19,7 @@ import net.xinqushi.orm.entity.City;
 import net.xinqushi.orm.mapper.CityMapper;
 import net.xinqushi.service.CityService;
 import net.xinqushi.util.JedisPoolUtil;
+import net.xinqushi.util.Pair;
 
 @Service
 public class CityServiceImpl implements CityService {
@@ -73,7 +74,7 @@ public class CityServiceImpl implements CityService {
 	}
 
 	@Override
-	public List<City> getCityListFromRedis(String cityName, Integer pageNum, Integer pageSize) throws CommonException {
+	public Pair<List<City>, Integer> getCityListFromRedis(String cityName, Integer pageNum, Integer pageSize) throws CommonException {
 		//从缓存取出并进行转换
 		String cityStr = JedisPoolUtil.getJedis().get(CacheConstants.CITY_KEY);
 		List<City> cities = JSON.parseObject(cityStr, TypeReferenceConstants.cityTypeRef);
@@ -95,8 +96,11 @@ public class CityServiceImpl implements CityService {
 				}
 			}
 		}
-		
-		return currentList;
+		//
+		Pair<List<City>, Integer> pageInfo = new Pair<List<City>, Integer>();
+		pageInfo.setValue1(currentList);
+		pageInfo.setValue2(currentList.size());
+		return pageInfo;
 	}
 
 }

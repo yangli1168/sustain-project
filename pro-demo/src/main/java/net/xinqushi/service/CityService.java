@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.xinqushi.common.exceptions.CommonException;
 import net.xinqushi.orm.entity.City;
+import net.xinqushi.util.Pair;
 
 public interface CityService {
 	
@@ -17,5 +18,5 @@ public interface CityService {
 	public void updateCityInfo(City mCity) throws CommonException;
 	
 	/** 查询城市列表:redis*/
-	public List<City> getCityListFromRedis(String cityName, Integer pageNum, Integer pageSize) throws CommonException;
+	public Pair<List<City>, Integer> getCityListFromRedis(String cityName, Integer pageNum, Integer pageSize) throws CommonException;
 }
