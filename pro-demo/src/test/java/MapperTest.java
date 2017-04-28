@@ -17,8 +17,10 @@ import net.xinqushi.common.constants.CacheConstants;
 import net.xinqushi.common.exceptions.CommonException;
 import net.xinqushi.orm.entity.City;
 import net.xinqushi.orm.entity.LineFixedSpot;
+import net.xinqushi.orm.entity.LineSpecialPrice;
 import net.xinqushi.orm.mapper.CityMapper;
 import net.xinqushi.orm.mapper.LineFixedSpotMapper;
+import net.xinqushi.orm.mapper.LineSpecialPriceMapper;
 import net.xinqushi.util.JedisPoolUtil;
 import net.xinqushi.util.Pair;
 import net.xinqushi.vo.LineFixedSpots;
@@ -52,10 +54,28 @@ public class MapperTest {
 			System.out.println(city.getId() + city.getName());
 		}
 	}
-
+	
+	@Test
+	public void testLineSpecialPriceMapper(){
+		LineSpecialPriceMapper mapper = session.getMapper(LineSpecialPriceMapper.class);
+		List<LineSpecialPrice> list = mapper.getAllLinePricingRules(System.currentTimeMillis());
+		for (LineSpecialPrice lineSpecialPrice : list) {
+			System.out.println(lineSpecialPrice.getId() + " -> " + lineSpecialPrice.getCityName());
+		}
+		System.out.println("num = " + list.size());
+	}
+	
 	public static void main(String[] args) throws CommonException {
-		String str = JedisPoolUtil.getJedis().hget("line.param.updated", "LINE_FIXED_SPOTS_UPDATED");
-		System.out.println("str =" + str);
+		Jedis jedis = JedisPoolUtil.getJedis();
+		
+		String str = jedis.hget("line.param.updated", "LINE_FIXED_SPOTS_UPDATED");
+		System.out.println("定点更新标志str = " + str);
+		
+		str = jedis.hget("line.param.updated", "LINE_DYNAMIC_PRICING_UPDATED");
+		System.out.println("调价规则更新标志str = " + str);
+		
+		
+		System.out.println("当前时间戳: " + System.currentTimeMillis());
 	}
 
 	@Test
