@@ -1,3 +1,4 @@
+package net.xinqushi;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -66,16 +67,16 @@ public class MapperTest {
 	}
 	
 	public static void main(String[] args) throws CommonException {
-		Jedis jedis = JedisPoolUtil.getJedis();
+//		Jedis jedis = JedisPoolUtil.getJedis();
+//		
+//		String str = jedis.hget("line.param.updated", "LINE_FIXED_SPOTS_UPDATED");
+//		System.out.println("定点更新标志str = " + str);
+//		
+//		str = jedis.hget("line.param.updated", "LINE_DYNAMIC_PRICING_UPDATED");
+//		System.out.println("调价规则更新标志str = " + str);
+//		
+//		System.out.println("当前时间戳: " + System.currentTimeMillis());
 		
-		String str = jedis.hget("line.param.updated", "LINE_FIXED_SPOTS_UPDATED");
-		System.out.println("定点更新标志str = " + str);
-		
-		str = jedis.hget("line.param.updated", "LINE_DYNAMIC_PRICING_UPDATED");
-		System.out.println("调价规则更新标志str = " + str);
-		
-		
-		System.out.println("当前时间戳: " + System.currentTimeMillis());
 	}
 
 	@Test
