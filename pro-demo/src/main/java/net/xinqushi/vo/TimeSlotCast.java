@@ -1,10 +1,10 @@
 package net.xinqushi.vo;
 
-public class TimeSlot {
+public class TimeSlotCast {
 
-	private long slotBegin;
+	private String slotBegin;
 	
-	private long slotEnd;
+	private String slotEnd;
 	
 	private int maxSeats;
 	
@@ -16,28 +16,28 @@ public class TimeSlot {
 		this.maxSeats = maxSeats;
 	}
 
-	public TimeSlot() {
+	public TimeSlotCast() {
     }
 
-	public TimeSlot(long slotBegin, long slotEnd) {
+	public TimeSlotCast(String slotBegin, String slotEnd) {
 	    this.slotBegin = slotBegin;
 	    this.slotEnd = slotEnd;
     }
 
-	public long getSlotBegin() {
+	public String getSlotBegin() {
 		return slotBegin;
 	}
 
-	public void setSlotBegin(long slotBegin) {
+	public void setSlotBegin(String slotBegin) {
 		this.slotBegin = slotBegin;
 	}
 
-	public long getSlotEnd() {
+	public String getSlotEnd() {
 		return slotEnd;
 	}
 
-	public void setSlotEnd(long slotEnd) {
+	public void setSlotEnd(String slotEnd) {
 		this.slotEnd = slotEnd;
 	}
-	
+
 }
