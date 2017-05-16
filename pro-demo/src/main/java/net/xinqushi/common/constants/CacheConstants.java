@@ -13,4 +13,8 @@ public class CacheConstants {
 	
 	/** 线路规定上下车地点*/
 	public static final String LINE_FIXED_SPOT_KEY = "line.fixed.spots";
+	
+	/** 线路设置key*/
+	public static final String LINE_SETTINGS_KEY = "line.settings";
+	
 }
