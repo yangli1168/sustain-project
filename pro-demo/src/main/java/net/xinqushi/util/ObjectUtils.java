@@ -5,8 +5,6 @@ import java.util.Arrays;
 
 /**
  * 
- * @author yuzb
- *
  */
 public class ObjectUtils {
 

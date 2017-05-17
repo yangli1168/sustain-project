@@ -9,5 +9,21 @@ public enum CommonStatus {
 	/** 非法*/
 	INVALID, 
 	/** 删除*/
-	DELETED
+	DELETED;
+	
+	public static String toString(CommonStatus status){
+		String result = null;
+		switch (status) {
+		case VALID:
+			result = "有效";
+			break;
+		case INVALID:
+			result = "无效";
+			break;
+		case DELETED:
+			result = "删除";
+			break;
+		}
+		return result;
+	}
 }

@@ -44,24 +44,28 @@ public class JedisPoolUtil {
 	
 	/**
 	 * 静态方法：获取jedis客户端
-	 * @param host
-	 * @param prot
-	 * @param timeout 超时时间
-	 * @param password
+	 * @param host 默认127.0.0.1
+	 * @param prot 端口，默认6379
+	 * @param timeout 超时时间，默认2000
+	 * @param password 默认123456
 	 * @param libraryNum 数据库序号,默认为0
 	 * @return
 	 */
-	public static Jedis getJedis(String host, int prot, int timeout, String password,
-			int libraryNum){
+	public static Jedis getJedis(String host, Integer prot, Integer timeout, String password,
+			Integer libraryNum){
 		try {
 			JedisPoolConfig config = new JedisPoolConfig();
 			config.setMaxTotal(10);
 			config.setMaxIdle(5);
 			
-			jedisPool = new JedisPool(config, host, prot, timeout, password);
+			jedisPool = new JedisPool(config, 
+							host == null ? "127.0.0.1" : host, 
+							prot == null ? 6379 : prot, 
+							timeout == null ? 2000 : timeout, 
+							password == null ? "123456" : password);
 			jedis = jedisPool.getResource();
 			//设置jedis默认的redis数据库表
-			jedis.select(libraryNum);
+			jedis.select(libraryNum==null?0:libraryNum);
 		} catch (Exception e) {
 			logger.error("Fail to initialize jedis pool", e);
 			try {

@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import com.alibaba.fastjson.JSON;
 
 import net.xinqushi.common.constants.CacheConstants;
+import net.xinqushi.common.enums.CommonStatus;
 import net.xinqushi.util.DateUtils;
 import net.xinqushi.util.JedisPoolUtil;
 import net.xinqushi.vo.LineSetting;
@@ -25,6 +26,10 @@ public class DemoTest {
 
 	public static void main(String[] args) {
 		getAvailableTimeSlots(33, "SHARE", 4);
+		
+//		System.out.println(CommonStatus.toString(CommonStatus.VALID));
+//		System.out.println(CommonStatus.VALID.toString());
+//		System.out.println(CommonStatus.VALID.name());
 
 	}
 

@@ -81,8 +81,10 @@ public class IdentityCardCheck {
 	}
 	
 	public static void main(String[] args) {
-		check("INFO", "6ce457c3aeae929450c56fcbfc6f8584",  "510321199702133131", "json");
-		check("LEAK", "6ce457c3aeae929450c56fcbfc6f8584",  "510183198510024719", "json");
+//		check("INFO", "6ce457c3aeae929450c56fcbfc6f8584",  "510321199702133131", "json");
+//		check("LEAK", "6ce457c3aeae929450c56fcbfc6f8584",  "510183198510024719", "json");
+		
+		
 	}
 
 	/**
