@@ -1,4 +1,4 @@
-package com.xinqushi.designrule.observerpattern;
+package com.xinqushi.designrule.observer;
 
 import java.util.ArrayList;
 import java.util.List;

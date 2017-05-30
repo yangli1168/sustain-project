@@ -1,4 +1,4 @@
-package com.xinqushi.designrule.observerpattern;
+package com.xinqushi.designrule.observer;
 /**
  * 气象站类
  * @author yangli

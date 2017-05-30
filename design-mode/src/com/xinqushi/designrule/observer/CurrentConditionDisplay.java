@@ -1,4 +1,4 @@
-package com.xinqushi.designrule.observerpattern;
+package com.xinqushi.designrule.observer;
 /**
  * 布告板具体实现类-当前观测值类
  * @author yangli

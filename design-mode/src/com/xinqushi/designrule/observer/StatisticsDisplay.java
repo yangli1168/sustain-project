@@ -1,4 +1,4 @@
-package com.xinqushi.designrule.observerpattern;
+package com.xinqushi.designrule.observer;
 /**
  * 布告板具体实现类-统计信息类[最小、平均、最大的观测值]
  * @author yangli

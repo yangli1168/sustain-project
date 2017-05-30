@@ -1,4 +1,4 @@
-package com.xinqushi.designrule.observerpattern;
+package com.xinqushi.designrule.observer;
 /**
  * 观察者模式-一个具体的观察者类
  * @author yangli

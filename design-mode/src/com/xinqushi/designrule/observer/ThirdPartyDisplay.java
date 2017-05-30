@@ -1,4 +1,4 @@
-package com.xinqushi.designrule.observerpattern;
+package com.xinqushi.designrule.observer;
 /**
  * 布告板具体实现类-第三方实现类[用于扩展]
  * @author yangli
