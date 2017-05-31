@@ -8,7 +8,7 @@ package com.xinqushi.designrule.decker;
 public abstract class Beverage {
 	
 	String description = "超类饮料";
-
+	
 	public String getDescription() {
 		return description;
 	}
