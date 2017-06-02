@@ -8,7 +8,7 @@ package com.xinqushi.designpattern.factory.shopping;
 public class CashFactory {
 	
 	/**
-	 * 现金收取工厂
+	 * 现金收取工厂方法
 	 * @param type
 	 * @return
 	 */
