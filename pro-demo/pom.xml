@@ -7,7 +7,7 @@
   
 	<!-- 版本管理 -->
 	<properties>
-		<jdk-version>1.8</jdk-version>
+		<jdk-version>1.7</jdk-version>
 		<source-encoding>UTF-8</source-encoding>
 		<resource-encoding>UTF-8</resource-encoding>
 		<spring-version>3.2.8.RELEASE</spring-version>
