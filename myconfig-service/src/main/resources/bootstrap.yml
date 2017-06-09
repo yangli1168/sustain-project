@@ -2,7 +2,7 @@ info:
   component: Config Server
 spring:
   application:
-    name: ConfigServer
+    name: xinqushi-configServer
   jmx:
     default_domain: cloud.config.server
   cloud:

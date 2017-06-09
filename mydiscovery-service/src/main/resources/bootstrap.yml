@@ -2,7 +2,7 @@ server:
   port: 8761
 spring:
   application:
-    name: xinqushi-discovery
+    name: xinqushi-discoveryServer
   cloud:
     config:
       uri: http://localhost:8888

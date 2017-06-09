@@ -16,9 +16,9 @@ public class JedisPoolUtil {
 
 	private static JedisPool jedisPool = null;
 	private static Jedis jedis = null;
-	private static final String REDIS_HOST = "112.74.133.11";
-	private static final String REDIS_PASSWORD = "aB~fVS'XVT}7Z4R':]/7*bt-Y(kMZ7_J";
-	private static final Integer REDIS_PORT = 6380;
+	private static final String REDIS_HOST = "127.0.0.1";
+	private static final String REDIS_PASSWORD = "123456";
+	private static final Integer REDIS_PORT = 6379;
 	
 	/** 静态方法：获取jedis客户端 */
 	public static Jedis getJedis(){

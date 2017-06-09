@@ -1,4 +1,4 @@
-package com.xinqushi.kotlin;
+package com.xinqushi.special;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by yangli on 2017/5/26 - 19:47.
  */
-public class Demo {
+public class Demo{
 
     public static void main(String[] args){
         List list = new ArrayList<Integer>();
