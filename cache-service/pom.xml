@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.net</groupId>
 	<artifactId>cache-service</artifactId>
-	<version>2017.0517.01</version>
+	<version>2017.0609.01</version>
 	
 	<properties>
-		<jdk-version>1.7</jdk-version>
+		<jdk-version>1.8</jdk-version>
 		<source-encoding>UTF-8</source-encoding>
 		<resource-encoding>UTF-8</resource-encoding>
 		<spring-version>3.2.8.RELEASE</spring-version>
