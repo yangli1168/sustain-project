@@ -253,7 +253,7 @@
   </insert>
 	
 	<!-- 核价日志列表 -->
-	<select id="listReservConfirmPriceLogs" resultMap="BaseResultMap">
+	<select id="listTestMethodLogs" resultMap="BaseResultMap">
 		select
 			l.id, l.opType, l.opTypeStr,  l.managementUserId, l.time,l.reservId
 		from tbl_audit_log l
