@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 
+import net.xinqushi.api.cache.CommonCacheManager;
 import net.xinqushi.common.constants.CacheConstants;
 import net.xinqushi.common.constants.TypeReferenceConstants;
 import net.xinqushi.common.enums.ManagementEventType;
@@ -31,6 +32,9 @@ public class CityServiceImpl implements CityService {
 	
 	@Autowired
 	private ManagementEventMarker managementEventMarker;
+	
+	@Autowired
+	private CommonCacheManager cacheManager;
 
 	/** 计算分页初始 */
 	private int calcPageStart(int pageSize, int pageNum) {
@@ -74,9 +78,24 @@ public class CityServiceImpl implements CityService {
 	}
 
 	@Override
-	public Pair<List<City>, Integer> getCityListFromRedis(String cityName, Integer pageNum, Integer pageSize) throws CommonException {
-		//从缓存取出并进行转换
+	public Pair<List<City>, Integer> getCityListFromLocalRedis(String cityName, Integer pageNum, Integer pageSize) throws CommonException {
+		//从本服务创建jedis从缓存取出
 		String cityStr = JedisPoolUtil.getJedis().get(CacheConstants.CITY_KEY);
+		
+		Pair<List<City>, Integer> pageInfo = convertCity(cityName, pageNum, pageSize, cityStr);
+		return pageInfo;
+	}
+	
+	@Override
+	public Pair<List<City>, Integer> getCityListFromRedisServer(String cityName, Integer pageNum, Integer pageSize) throws CommonException {
+		//从缓存服务中取出
+		String cityStr = this.cacheManager.getCacheValue(CacheConstants.CITY_KEY);
+		//转换
+		Pair<List<City>, Integer> pageInfo = convertCity(cityName, pageNum, pageSize, cityStr);
+		return pageInfo;
+	}
+
+	private Pair<List<City>, Integer> convertCity(String cityName, Integer pageNum, Integer pageSize, String cityStr) {
 		List<City> cities = JSON.parseObject(cityStr, TypeReferenceConstants.cityTypeRef);
 		//按条件进行筛选
 		List<City> currentList = new ArrayList<City>();

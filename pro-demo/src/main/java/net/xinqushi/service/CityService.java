@@ -17,6 +17,9 @@ public interface CityService {
 	/** 修改城市信息*/
 	public void updateCityInfo(City mCity) throws CommonException;
 	
-	/** 查询城市列表:redis*/
-	public Pair<List<City>, Integer> getCityListFromRedis(String cityName, Integer pageNum, Integer pageSize) throws CommonException;
+	/** 查询城市列表:本服务redis*/
+	public Pair<List<City>, Integer> getCityListFromLocalRedis(String cityName, Integer pageNum, Integer pageSize) throws CommonException;
+	
+	/** 查询城市列表:redis服务器*/
+	public Pair<List<City>, Integer> getCityListFromRedisServer(String cityName, Integer pageNum, Integer pageSize) throws CommonException;
 }

@@ -43,13 +43,28 @@ public class CityController {
 		}
 	}
 	
-	@RequestMapping(value = "/cache/list", method = RequestMethod.POST)
-	public RestResponse getCityListFromRedis(@RequestParam(value = "cityName", required = false)String cityName,
+	@RequestMapping(value = "/cache/local/list", method = RequestMethod.POST)
+	public RestResponse getCityListFromLocalRedis(@RequestParam(value = "cityName", required = false)String cityName,
 			@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "20")Integer pageSize){
 		RestResponse response = new RestResponse();
 		try {
-			Pair<List<City>, Integer> pageInfo = cityService.getCityListFromRedis(cityName, pageNum, pageSize);
+			Pair<List<City>, Integer> pageInfo = cityService.getCityListFromLocalRedis(cityName, pageNum, pageSize);
+			response.setAppendix(pageInfo.getValue2());
+			response.setData(pageInfo.getValue1());
+			return response;
+		} catch (CommonException e) {
+			return RestResponse.build(e.getStatusCode(), e.getMessage());
+		}
+	}
+	
+	@RequestMapping(value = "/cache/server/list", method = RequestMethod.POST)
+	public RestResponse getCityListFromRedisServer(@RequestParam(value = "cityName", required = false)String cityName,
+			@RequestParam(value = "pageNum", defaultValue = "1")Integer pageNum,
+			@RequestParam(value = "pageSize", defaultValue = "20")Integer pageSize){
+		RestResponse response = new RestResponse();
+		try {
+			Pair<List<City>, Integer> pageInfo = cityService.getCityListFromRedisServer(cityName, pageNum, pageSize);
 			response.setAppendix(pageInfo.getValue2());
 			response.setData(pageInfo.getValue1());
 			return response;

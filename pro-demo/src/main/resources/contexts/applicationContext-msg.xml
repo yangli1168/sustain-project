@@ -56,6 +56,27 @@
 		</constructor-arg>
 	</bean>
 	
+	<bean id="auditLogProcessor"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnFactory" />
+		<property name="destination" ref="auditLogDestination" />
+		<property name="messageListener" ref="auditLogReceiver" />
+		<property name="sessionAcknowledgeMode" value="1" />
+		<property name="pubSubDomain" value="true" />
+		<property name="subscriptionDurable" value="true" />
+		
+		<property name="clientId" value="audit-logs" />
+		<property name="durableSubscriptionName" value="audit-logs" />
+		<!-- <property name="clientId" value="${mq.client.audit.log}" /> -->
+		<!-- <property name="durableSubscriptionName" value="${mq.client.audit.log}" /> -->
+		
+		<property name="concurrentConsumers" value="2" />
+		<property name="maxConcurrentConsumers" value="6" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="idleTaskExecutionLimit" value="10" />
+		<property name="idleConsumerLimit" value="5" />
+	</bean>
+	
 	<!-- <bean id="auditLogReceiver"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="jmsConnFactory" />

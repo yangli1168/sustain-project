@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.xinqushi.orm.mapper.AuditLogMapper">
+	<resultMap id="BaseResultMap" type="net.xinqushi.orm.entity.AuditLog">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="opType" property="opType" jdbcType="TINYINT"
+			typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+		<result column="opTypeStr" property="opTypeStr" jdbcType="VARCHAR"
+			typeHandler="org.apache.ibatis.type.EnumTypeHandler" />
+		<result column="time" property="time" jdbcType="BIGINT" />
+		<result column="userId" property="userId" jdbcType="BIGINT" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="deviceId" property="deviceId" jdbcType="VARCHAR" />
+		<result column="version" property="version" jdbcType="VARCHAR" />
+		<result column="managementUserId" property="managementUserId" jdbcType="INTEGER" />
+		<result column="managementUserName" property="managementUserName" jdbcType="VARCHAR" />
+		<result column="managementLoginName" property="managementLoginName" jdbcType="VARCHAR" />
+		<result column="reservId" property="reservId" jdbcType="BIGINT" />
+		<result column="reservNo" property="reservNo" jdbcType="VARCHAR" />
+		<result column="orderId" property="orderId" jdbcType="BIGINT" />
+		<result column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+		<result column="strField1" property="strField1" jdbcType="VARCHAR" />
+		<result column="strField2" property="strField2" jdbcType="VARCHAR" />
+		<result column="strField3" property="strField3" jdbcType="VARCHAR" />
+		<result column="strField4" property="strField4" jdbcType="VARCHAR" />
+		<result column="intField1" property="intField1" jdbcType="INTEGER" />
+		<result column="intField2" property="intField2" jdbcType="INTEGER" />
+		<result column="intField3" property="intField3" jdbcType="INTEGER" />
+		<result column="intField4" property="intField4" jdbcType="INTEGER" />
+		<result column="floatField1" property="floatField1" jdbcType="REAL" />
+		<result column="floatField2" property="floatField2" jdbcType="REAL" />
+		<result column="floatField3" property="floatField3" jdbcType="REAL" />
+		<result column="floatField4" property="floatField4" jdbcType="REAL" />
+		<result column="doubleField1" property="doubleField1" jdbcType="DOUBLE" />
+		<result column="doubleField2" property="doubleField2" jdbcType="DOUBLE" />
+		<result column="doubleField3" property="doubleField3" jdbcType="DOUBLE" />
+		<result column="doubleField4" property="doubleField4" jdbcType="DOUBLE" />
+		<result column="longField1" property="longField1" jdbcType="BIGINT" />
+		<result column="longField2" property="longField2" jdbcType="BIGINT" />
+		<result column="longField3" property="longField3" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, opType, opTypeStr, time, userId, phone, deviceId, version, managementUserId, managementUserName, reservId, reservNo,
+		orderId,
+		orderNo, strField1, strField2, strField3, strField4, intField1, intField2,
+		intField3,
+		intField4, floatField1, floatField2, floatField3, floatField4, doubleField1,
+		doubleField2,
+		doubleField3, doubleField4, longField1, longField2, longField3
+	</sql>
+	
+	<insert id="insertSelective" parameterType="net.xinqushi.orm.entity.AuditLog" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tbl_audit_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="opType != null" >
+        opType,
+      </if>
+      <if test="opTypeStr != null" >
+        opTypeStr,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="userId != null" >
+        userId,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="deviceId != null" >
+        deviceId,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="managementUserId != null" >
+      	managementUserId,
+      </if>
+      <if test="managementUserName != null" >
+      	managementUserName,
+      </if>
+      <if test="reservId != null" >
+        reservId,
+      </if>
+      <if test="reservNo != null" >
+        reservNo,
+      </if>
+      <if test="orderId != null" >
+        orderId,
+      </if>
+      <if test="orderNo != null" >
+        orderNo,
+      </if>
+      <if test="strField1 != null" >
+        strField1,
+      </if>
+      <if test="strField2 != null" >
+        strField2,
+      </if>
+      <if test="strField3 != null" >
+        strField3,
+      </if>
+      <if test="strField4 != null" >
+        strField4,
+      </if>
+      <if test="intField1 != null" >
+        intField1,
+      </if>
+      <if test="intField2 != null" >
+        intField2,
+      </if>
+      <if test="intField3 != null" >
+        intField3,
+      </if>
+      <if test="intField4 != null" >
+        intField4,
+      </if>
+      <if test="floatField1 != null" >
+        floatField1,
+      </if>
+      <if test="floatField2 != null" >
+        floatField2,
+      </if>
+      <if test="floatField3 != null" >
+        floatField3,
+      </if>
+      <if test="floatField4 != null" >
+        floatField4,
+      </if>
+      <if test="doubleField1 != null" >
+        doubleField1,
+      </if>
+      <if test="doubleField2 != null" >
+        doubleField2,
+      </if>
+      <if test="doubleField3 != null" >
+        doubleField3,
+      </if>
+      <if test="doubleField4 != null" >
+        doubleField4,
+      </if>
+      <if test="longField1 != null" >
+        longField1,
+      </if>
+      <if test="longField2 != null" >
+        longField2,
+      </if>
+      <if test="longField3 != null" >
+        longField3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="opType != null" >
+        #{opType,jdbcType=TINYINT,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+      </if>
+       <if test="opTypeStr != null" >
+        #{opTypeStr,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="managementUserId != null" >
+      	#{managementUserId,jdbcType=INTEGER},
+      </if>
+      <if test="managementUserName != null" >
+      	#{managementUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="reservId != null" >
+        #{reservId,jdbcType=BIGINT},
+      </if>
+      <if test="reservNo != null" >
+        #{reservNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="strField1 != null" >
+        #{strField1,jdbcType=VARCHAR},
+      </if>
+      <if test="strField2 != null" >
+        #{strField2,jdbcType=VARCHAR},
+      </if>
+      <if test="strField3 != null" >
+        #{strField3,jdbcType=VARCHAR},
+      </if>
+      <if test="strField4 != null" >
+        #{strField4,jdbcType=VARCHAR},
+      </if>
+      <if test="intField1 != null" >
+        #{intField1,jdbcType=INTEGER},
+      </if>
+      <if test="intField2 != null" >
+        #{intField2,jdbcType=INTEGER},
+      </if>
+      <if test="intField3 != null" >
+        #{intField3,jdbcType=INTEGER},
+      </if>
+      <if test="intField4 != null" >
+        #{intField4,jdbcType=INTEGER},
+      </if>
+      <if test="floatField1 != null" >
+        #{floatField1,jdbcType=REAL},
+      </if>
+      <if test="floatField2 != null" >
+        #{floatField2,jdbcType=REAL},
+      </if>
+      <if test="floatField3 != null" >
+        #{floatField3,jdbcType=REAL},
+      </if>
+      <if test="floatField4 != null" >
+        #{floatField4,jdbcType=REAL},
+      </if>
+      <if test="doubleField1 != null" >
+        #{doubleField1,jdbcType=DOUBLE},
+      </if>
+      <if test="doubleField2 != null" >
+        #{doubleField2,jdbcType=DOUBLE},
+      </if>
+      <if test="doubleField3 != null" >
+        #{doubleField3,jdbcType=DOUBLE},
+      </if>
+      <if test="doubleField4 != null" >
+        #{doubleField4,jdbcType=DOUBLE},
+      </if>
+      <if test="longField1 != null" >
+        #{longField1,jdbcType=BIGINT},
+      </if>
+      <if test="longField2 != null" >
+        #{longField2,jdbcType=BIGINT},
+      </if>
+      <if test="longField3 != null" >
+        #{longField3,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+	
+	<!-- 核价日志列表 -->
+	<select id="listReservConfirmPriceLogs" resultMap="BaseResultMap">
+		select
+			l.id, l.opType, l.opTypeStr,  l.managementUserId, l.time,l.reservId
+		from tbl_audit_log l
+		WHERE l.reservId = #{reservId} and l.opTypeStr = "TEST_OPERATION"
+		order by l.id desc
+		<if test="start != null">
+			limit #{start}, #{pageSize}
+		</if>
+	</select>
+	
+	<!-- 测试方法日志列表计数 -->
+	<select id="countTestMethodLogs" resultType="java.lang.Integer">
+		select
+			count(*)
+		from tbl_audit_log l
+		WHERE l.reservId = #{reservId} and l.opTypeStr = "TEST_OPERATION"
+	</select>
+</mapper>
