@@ -2,10 +2,12 @@ package net.xinqushi.jms;
 
 import java.util.TreeSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import net.xinqushi.api.cache.CommonCacheManager;
 import net.xinqushi.common.enums.ManagementEventType;
-import net.xinqushi.util.JedisPoolUtil;
+import net.xinqushi.common.exceptions.CommonException;
 
 /**
  * 生成事件标志类：用于在redis缓存中生成标志
@@ -15,15 +17,19 @@ import net.xinqushi.util.JedisPoolUtil;
 @Component
 public class ManagementEventMarker {
 	
+	@Autowired
+	private CommonCacheManager cacheManager;
+	
 	/**
 	 * 生成标志
 	 * @param signKind 标志的种类
 	 * @param eventType 事件的类型
 	 * @param data
 	 * 2017年4月25日-上午10:27:43
+	 * @throws CommonException 
 	 */
-	public void markManagmentEvent(String signKind, ManagementEventType eventType, String data) {
-		JedisPoolUtil.getJedis().hset(signKind, eventType.name(), data);
+	public void markManagmentEvent(String signKind, ManagementEventType eventType, String data) throws CommonException {
+		this.cacheManager.hset(signKind, eventType.name(), data);
 	}
 	
 	/**
@@ -32,9 +38,10 @@ public class ManagementEventMarker {
 	 * @param eventType
 	 * @param data
 	 * 2017年4月25日-上午10:29:03
+	 * @throws CommonException 
 	 */
-	public void appendManagmentEvent(String signKind, ManagementEventType eventType, String data){
-		String str = JedisPoolUtil.getJedis().hget(signKind, eventType.name());
+	public void appendManagmentEvent(String signKind, ManagementEventType eventType, String data) throws CommonException{
+		String str = this.cacheManager.hget(signKind, eventType.name());
 		if (null == str) {
 			this.markManagmentEvent(signKind, eventType, data);
 		} else {
