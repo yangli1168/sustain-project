@@ -26,6 +26,7 @@
 		<quartz-version>2.2.1</quartz-version>
 		<activemq-version>5.12.0</activemq-version>
 		<tomcat.version>7.0.64</tomcat.version>
+		<common-comp-version>1.0.0</common-comp-version>
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${version}</finalName>
@@ -146,6 +147,11 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<dependency>
+			<groupId>com.net</groupId>
+			<artifactId>mycommon-component</artifactId>
+			<version>${common-comp-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter</artifactId>
