@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.alibaba.fastjson.TypeReference;
 
-import net.xinqushi.orm.entity.City;
+import net.xinqushi.common.entity.City;
+
 
 /**
  * 用于json转换的常量类

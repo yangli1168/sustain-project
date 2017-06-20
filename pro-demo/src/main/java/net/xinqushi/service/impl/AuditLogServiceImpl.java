@@ -24,7 +24,6 @@ public class AuditLogServiceImpl implements AuditLogService {
 	@Autowired
 	private AuditLogMapper auditLogMapper;
 	
-	@Autowired
 	private PageUtils pageUtils;
 
 	private void pushAuditLogToQueue(AuditLog log) {

@@ -1,14 +1,11 @@
 package net.xinqushi.util;
 
-import org.springframework.stereotype.Component;
-
 import com.alibaba.fastjson.JSONObject;
 
 /**
  * 分页工具类
  * @author yangli
  */
-@Component
 public class PageUtils {
 	
 	/** 返回分页查询记录首地址*/

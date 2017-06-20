@@ -30,7 +30,6 @@ public class AuditLogController{
 	@Autowired
 	private AuditLogService auditLogService;
 	
-	@Autowired
 	private PageUtils pageUtils;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
