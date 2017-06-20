@@ -30,11 +30,19 @@
 			<ref bean="dataSource" />
 		</property>
 		<property name="configLocation" value="classpath:mybatis.xml"/>
+		<!-- 配置下方的扫包时，此处的mapperLocations属性可不配置 -->
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:net/xinqushi/orm/**/*Mapper.xml</value>
+			</list>
+		</property>
 	</bean>
-	
+	 
 	<bean id="dataSourceWrite" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClass}" />
 		<property name="jdbcUrl" value="${write.jdbc.url}" />
+		<property name="user" value="${write.jdbc.username}" />
+		<property name="password" value="${write.jdbc.password}" />
 		<property name="initialPoolSize" value="${write.c3p0.initialPoolSize}" />
 		<property name="acquireIncrement" value="${write.c3p0.acquireIncrement}" />
 		<property name="maxConnectionAge" value="${write.c3p0.maxConnectionAge}" />
@@ -48,8 +56,25 @@
 		<property name="preferredTestQuery" value="${write.c3p0.preferredTestQuery}" />
 		<property name="checkoutTimeout" value="${write.c3p0.checkoutTimeout}" />
 		<property name="unreturnedConnectionTimeout" value="${write.c3p0.unreturnedConnectionTimeout}" />
+		
+		<!-- <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/uto?useUnicode=true&amp;characterEncoding=utf-8"/>
+		<property name="user" value="root" />
+		<property name="password" value="yangli"/>
+		<property name="initialPoolSize" value="5" />
+		<property name="acquireIncrement" value="3" />
+		<property name="maxConnectionAge" value="3000" />
+		<property name="maxPoolSize" value="10" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxStatements" value="0" />
+		<property name="numHelperThreads" value="10" />
+		<property name="idleConnectionTestPeriod" value="30" />
+		<property name="testConnectionOnCheckin" value="true" />
+		<property name="testConnectionOnCheckout" value="true" />
+		<property name="preferredTestQuery" value="select 1" />
+		<property name="checkoutTimeout" value="3000" />
+		<property name="unreturnedConnectionTimeout" value="300" /> -->
 	</bean>
-	
 	<bean id="dataSourceRead" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="${jdbc.driverClass}" />
 		<property name="jdbcUrl" value="${read.jdbc.url}" />
@@ -66,11 +91,50 @@
 		<property name="preferredTestQuery" value="${read.c3p0.preferredTestQuery}" />
 		<property name="checkoutTimeout" value="${read.c3p0.checkoutTimeout}" />
 		<property name="unreturnedConnectionTimeout" value="${read.c3p0.unreturnedConnectionTimeout}" />
+		
+		<!-- <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/uto?useUnicode=true&amp;characterEncoding=utf-8"/>
+		<property name="user" value="root" />
+		<property name="password" value="yangli"/>
+		<property name="initialPoolSize" value="5" />
+		<property name="acquireIncrement" value="3" />
+		<property name="maxConnectionAge" value="3000" />
+		<property name="maxPoolSize" value="10" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxStatements" value="0" />
+		<property name="numHelperThreads" value="10" />
+		<property name="idleConnectionTestPeriod" value="30" />
+		<property name="testConnectionOnCheckin" value="true" />
+		<property name="testConnectionOnCheckout" value="true" />
+		<property name="preferredTestQuery" value="select 1" />
+		<property name="checkoutTimeout" value="3000" />
+		<property name="unreturnedConnectionTimeout" value="300" /> -->
 	</bean>
-
+	<!-- 	<bean id="dataSourceWrite" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClass}" />
+		<property name="jdbcUrl" value="${write.jdbc.url}" />
+		<property name="user" value="${write.jdbc.username}" />
+		<property name="password" value="${write.jdbc.password}" />
+		<property name="initialPoolSize" value="${write.c3p0.initialPoolSize}" />
+		<property name="acquireIncrement" value="${write.c3p0.acquireIncrement}" />
+		<property name="maxConnectionAge" value="${write.c3p0.maxConnectionAge}" />
+		<property name="maxPoolSize" value="${write.c3p0.maxPoolSize}" />
+		<property name="minPoolSize" value="${write.c3p0.minPoolSize}" />
+		<property name="maxStatements" value="${write.c3p0.maxStatements}" />
+		<property name="numHelperThreads" value="${write.c3p0.numHelperThreads}" />
+		<property name="idleConnectionTestPeriod" value="${write.c3p0.idleConnectionTestPeriod}" />
+		<property name="testConnectionOnCheckin" value="${write.c3p0.testConnectionOnCheckin}" />
+		<property name="testConnectionOnCheckout" value="${write.c3p0.testConnectionOnCheckout}" />
+		<property name="preferredTestQuery" value="${write.c3p0.preferredTestQuery}" />
+		<property name="checkoutTimeout" value="${write.c3p0.checkoutTimeout}" />
+		<property name="unreturnedConnectionTimeout" value="${write.c3p0.unreturnedConnectionTimeout}" />
+	</bean> -->
+	 <!-- 配置数据源结束 -->
+	
 	<!-- 扫包  -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="net.xinqushi.orm.mapper"/>
 		<property name="markerInterface" value="net.xinqushi.orm.mapper.SqlMapper"/>
 	</bean>
+
 </beans>

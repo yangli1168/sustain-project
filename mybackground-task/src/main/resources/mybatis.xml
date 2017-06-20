@@ -15,7 +15,7 @@
 	</settings>
 
 	<plugins>
-		<plugin interceptor="net.xinqushi.orm.mapper.SqlMapper" />
+		<plugin interceptor="net.xinqushi.orm.datasource.SQLInterceptor" />
 	</plugins>
-
+	
 </configuration>
