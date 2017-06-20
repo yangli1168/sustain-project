@@ -1,6 +1,6 @@
 spring:
   application:
-    name: background-task
+    name: mybackground-task
   cloud:
     config:
       uri: http://localhost:8888

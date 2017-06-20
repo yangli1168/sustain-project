@@ -14,7 +14,7 @@ import net.xinqushi.cache.CityCache;
 public class PopulateCacheTask extends QuartzJobBean {
 
 	private static Logger logger = LoggerFactory.getLogger(PopulateCacheTask.class);
-
+	
 	private CityCache cityCache;
 
 	private void preloadDependencies(JobExecutionContext context) throws Exception {

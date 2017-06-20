@@ -12,5 +12,4 @@
 	<beans:import resource="classpath:contexts/applicationContext-mvc.xml" />
 	<beans:import resource="classpath:contexts/applicationContext-msg.xml" />
 	
-
 </beans:beans>
