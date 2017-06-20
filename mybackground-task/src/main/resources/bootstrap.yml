@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: background-task
+  cloud:
+    config:
+      uri: http://localhost:8888

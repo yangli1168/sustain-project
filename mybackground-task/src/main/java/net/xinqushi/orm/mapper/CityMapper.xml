@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.xinqushi.orm.mapper.CityMapper">
+	<resultMap id="BaseResultMap" type="net.xinqushi.orm.entity.City">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="pinyin" property="pinyin" jdbcType="VARCHAR" />
+		<result column="baiduId" property="baiduId" jdbcType="INTEGER" />
+		<result column="latitude" property="latitude" jdbcType="DOUBLE" />
+		<result column="longtitude" property="longtitude" jdbcType="DOUBLE" />
+		<result column="status" property="status" jdbcType="VARCHAR"
+			typeHandler="org.apache.ibatis.type.EnumTypeHandler" />
+		<result column="createTime" property="createTime" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, pinyin, baiduId, latitude, longtitude, status, createTime
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tbl_v2_city
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from tbl_v2_city
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="net.xinqushi.orm.entity.City">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into tbl_v2_city (name, pinyin, baiduId,
+		latitude, longtitude, status,
+		createTime)
+		values (#{name,jdbcType=VARCHAR}, #{pinyin,jdbcType=VARCHAR},
+		#{baiduId,jdbcType=INTEGER},
+		#{latitude,jdbcType=DOUBLE}, #{longtitude,jdbcType=DOUBLE},
+		#{status,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+		#{createTime,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="net.xinqushi.orm.entity.City">
+		<selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into tbl_v2_city
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				name,
+			</if>
+			<if test="pinyin != null">
+				pinyin,
+			</if>
+			<if test="baiduId != null">
+				baiduId,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="longtitude != null">
+				longtitude,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="pinyin != null">
+				#{pinyin,jdbcType=VARCHAR},
+			</if>
+			<if test="baiduId != null">
+				#{baiduId,jdbcType=INTEGER},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=DOUBLE},
+			</if>
+			<if test="longtitude != null">
+				#{longtitude,jdbcType=DOUBLE},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="net.xinqushi.orm.entity.City">
+		update tbl_v2_city
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="pinyin != null">
+				pinyin = #{pinyin,jdbcType=VARCHAR},
+			</if>
+			<if test="baiduId != null">
+				baiduId = #{baiduId,jdbcType=INTEGER},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=DOUBLE},
+			</if>
+			<if test="longtitude != null">
+				longtitude = #{longtitude,jdbcType=DOUBLE},
+			</if>
+			<if test="status != null">
+				status =
+				#{status,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="net.xinqushi.orm.entity.City">
+		update tbl_v2_city
+		set name = #{name,jdbcType=VARCHAR},
+		pinyin = #{pinyin,jdbcType=VARCHAR},
+		baiduId = #{baiduId,jdbcType=INTEGER},
+		latitude = #{latitude,jdbcType=DOUBLE},
+		longtitude = #{longtitude,jdbcType=DOUBLE},
+		status =
+		#{status,jdbcType=VARCHAR,typeHandler=org.apache.ibatis.type.EnumTypeHandler},
+		createTime = #{createTime,jdbcType=BIGINT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 查询分页 -->
+	<select id="getCityList" resultMap="BaseResultMap">
+		select
+		id, name, pinyin, baiduId, latitude, longtitude, status
+		from tbl_v2_city
+		where status &lt;&gt; 'DELETED'
+		<if test="name != null">
+			and name like CONCAT('%',#{name,jdbcType=INTEGER},'%')
+		</if>
+		<if test="start != null">
+		limit #{start,jdbcType=INTEGER}, #{end,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- 查询单个记录 -->
+	<select id="getCityById" resultMap="BaseResultMap">
+		select
+		id, name, pinyin, baiduId, latitude, longtitude
+		from tbl_v2_city
+		where id = #{id}
+	</select>
+	<!-- 修改 -->
+	<update id="updateCityById" parameterType="net.xinqushi.orm.entity.City">
+		update tbl_v2_city
+		set name = #{name,jdbcType=VARCHAR},
+		pinyin = #{pinyin,jdbcType=VARCHAR},
+		baiduId = #{baiduId,jdbcType=INTEGER},
+		latitude = #{latitude,jdbcType=DOUBLE},
+		longtitude = #{longtitude,jdbcType=DOUBLE}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 按name返回记录数 -->
+	<select id="countByName" parameterType="string" resultType="java.lang.Integer">
+		select count(*) from tbl_v2_city where status &lt;&gt; 'DELETED'
+		<if test="name != null">
+			and name like CONCAT('%',#{name,jdbcType=INTEGER},'%')
+		</if>
+	</select>
+	<!-- 按pinyin返回记录数 -->
+	<select id="countByPinyin" parameterType="string" resultType="java.lang.Integer">
+		select count(*) from tbl_v2_city where status = "VALID" and 
+		pinyin = #{pinyin}
+	</select>
+	
+	<select id="getCityByName" resultMap="BaseResultMap" >
+		select id
+		from tbl_v2_city
+		where name = #{name,jdbcType=VARCHAR} and status &lt;&gt; 'DELETED'
+	</select>
+</mapper>
