@@ -47,6 +47,7 @@ public interface CommonCacheManager {
 	@RequestMapping(value = "/captcha/valid", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public int isCaptchaValid(@RequestParam("captchaKey") String captchaKey, @RequestParam("captcha") String captcha)
 	        throws CommonException;
-
-	public void hdel(String cityParamUpdated, String name);
+	
+	@RequestMapping(value = "/hdel", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void hdel(@RequestParam("key") String key, @RequestParam("field") String field) throws CommonException;
 }

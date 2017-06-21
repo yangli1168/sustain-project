@@ -51,9 +51,7 @@ public class Application {
 			.append(" -> ")
 			.append(conf.getRedisPwd())
 			.append(" -> ")
-			.append(conf.getSpecialPhone())
-			.append(" -> ")
-			.append(conf.getResvInfo());
+			.append(conf.getSpecialPhone());
 		return sb.toString();
 	}
 	

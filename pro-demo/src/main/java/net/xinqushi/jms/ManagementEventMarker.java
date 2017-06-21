@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import net.xinqushi.api.cache.CommonCacheManager;
 import net.xinqushi.common.enums.ManagementEventType;
 import net.xinqushi.common.exceptions.CommonException;
+import net.xinqushi.util.JedisPoolUtil;
 
 /**
  * 生成事件标志类：用于在redis缓存中生成标志

@@ -30,8 +30,6 @@ public class AuditLogController{
 	@Autowired
 	private AuditLogService auditLogService;
 	
-	private PageUtils pageUtils;
-	
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	public RestResponse testLog(@RequestParam("param") String param) throws Exception{
 		
@@ -54,7 +52,7 @@ public class AuditLogController{
 		JSONObject jo = JSON.parseObject(param);
 		Long reservId = jo.getLong("reservId");
 	
-		Pair<Integer, Integer> pageRequestInfo = this.pageUtils.getPageRequestInfo(jo);
+		Pair<Integer, Integer> pageRequestInfo = PageUtils.getPageRequestInfo(jo);
 		
 		RestResponse response = new RestResponse();
 		Pair<List<AuditLog>, Integer> pair = this.auditLogService.listAuditLogsByReservId(reservId, pageRequestInfo.getValue1(), pageRequestInfo.getValue2());

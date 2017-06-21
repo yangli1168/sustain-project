@@ -110,25 +110,6 @@
 		<property name="checkoutTimeout" value="3000" />
 		<property name="unreturnedConnectionTimeout" value="300" /> -->
 	</bean>
-	<!-- 	<bean id="dataSourceWrite" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-		<property name="driverClass" value="${jdbc.driverClass}" />
-		<property name="jdbcUrl" value="${write.jdbc.url}" />
-		<property name="user" value="${write.jdbc.username}" />
-		<property name="password" value="${write.jdbc.password}" />
-		<property name="initialPoolSize" value="${write.c3p0.initialPoolSize}" />
-		<property name="acquireIncrement" value="${write.c3p0.acquireIncrement}" />
-		<property name="maxConnectionAge" value="${write.c3p0.maxConnectionAge}" />
-		<property name="maxPoolSize" value="${write.c3p0.maxPoolSize}" />
-		<property name="minPoolSize" value="${write.c3p0.minPoolSize}" />
-		<property name="maxStatements" value="${write.c3p0.maxStatements}" />
-		<property name="numHelperThreads" value="${write.c3p0.numHelperThreads}" />
-		<property name="idleConnectionTestPeriod" value="${write.c3p0.idleConnectionTestPeriod}" />
-		<property name="testConnectionOnCheckin" value="${write.c3p0.testConnectionOnCheckin}" />
-		<property name="testConnectionOnCheckout" value="${write.c3p0.testConnectionOnCheckout}" />
-		<property name="preferredTestQuery" value="${write.c3p0.preferredTestQuery}" />
-		<property name="checkoutTimeout" value="${write.c3p0.checkoutTimeout}" />
-		<property name="unreturnedConnectionTimeout" value="${write.c3p0.unreturnedConnectionTimeout}" />
-	</bean> -->
 	 <!-- 配置数据源结束 -->
 	
 	<!-- 扫包  -->

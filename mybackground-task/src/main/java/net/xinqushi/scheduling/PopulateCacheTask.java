@@ -32,9 +32,12 @@ public class PopulateCacheTask extends QuartzJobBean {
 		try {
 			preloadDependencies(context);
 			
-			logger.info("----定时任务：'缓存城市信息'开始执行----" + System.currentTimeMillis() + "-------");
+			long start = System.currentTimeMillis();
+			logger.info("----定时任务：'检测缓存城市信息'开始执行----" + start + "-------");
 			
 			this.cityCache.checkManagementEventAgainstCache();
+			
+			logger.info("------定时任务：'检测缓存城市信息'执行完成, 耗时" + (System.currentTimeMillis() - start) + "毫秒------");
 		} catch (Exception e) {
 			logger.error("Fail to process cache update", e);
 		}

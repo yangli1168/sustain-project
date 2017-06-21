@@ -24,8 +24,6 @@ public class AuditLogServiceImpl implements AuditLogService {
 	@Autowired
 	private AuditLogMapper auditLogMapper;
 	
-	private PageUtils pageUtils;
-
 	private void pushAuditLogToQueue(AuditLog log) {
 		auditLogPublisher.sendAuditLogsToQueue(log);
 	}
@@ -48,7 +46,7 @@ public class AuditLogServiceImpl implements AuditLogService {
 		int nums = this.auditLogMapper.countTestMethodLogs(reservId);
 		List<AuditLog> list = new ArrayList<AuditLog>();
 		if (nums > 0) {
-			list = this.auditLogMapper.listTestMethodLogs(reservId, this.pageUtils.calcPageStart(pageNum, pageSize), pageSize);
+			list = this.auditLogMapper.listTestMethodLogs(reservId, PageUtils.calcPageStart(pageNum, pageSize), pageSize);
 		}
 		
 		return new Pair<List<AuditLog>, Integer>(list, nums);

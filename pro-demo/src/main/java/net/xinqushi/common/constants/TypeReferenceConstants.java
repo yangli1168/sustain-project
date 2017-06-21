@@ -6,6 +6,8 @@ import com.alibaba.fastjson.TypeReference;
 
 import net.xinqushi.orm.entity.City;
 
+
+
 /**
  * 用于json转换的常量类
  * @author yangli

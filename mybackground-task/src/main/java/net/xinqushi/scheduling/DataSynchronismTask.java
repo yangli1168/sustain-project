@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import net.xinqushi.api.cache.CommonCacheManager;
 import net.xinqushi.orm.entity.City;
 import net.xinqushi.orm.mapper.CityMapper;
+import net.xinqushi.util.JedisPoolUtil;
 @Component
 public class DataSynchronismTask extends QuartzJobBean{
 	private static Logger logger = LoggerFactory.getLogger(DataSynchronismTask.class);
@@ -48,7 +49,8 @@ public class DataSynchronismTask extends QuartzJobBean{
 			preloadDependencies(context);
 			
 			List<City> cityList = cityMapper.getCityList(null, null, null);
-			this.cacheManager.cache("city:list:test", JSON.toJSONString(cityList));
+//			this.cacheManager.cache("city:list:sync", JSON.toJSONString(cityList));
+			JedisPoolUtil.getJedis().set("city:list:sync", JSON.toJSONString(cityList));
 			logger.info("------数据同步任务执行完成, 耗时" + (System.currentTimeMillis() - startTime) + "毫秒------");
 		} catch (Exception e) {
 			logger.error("fail to synchronism data with redis", e);

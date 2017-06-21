@@ -1,6 +1,7 @@
 package net.xinqushi.vo;
 
 import net.xinqushi.common.enums.ManagementEventType;
+
 /**
  * 事件类
  * @author yangli

@@ -97,6 +97,7 @@ public class CityServiceImpl implements CityService {
 
 	private Pair<List<City>, Integer> convertCity(String cityName, Integer pageNum, Integer pageSize, String cityStr) {
 		List<City> cities = JSON.parseObject(cityStr, TypeReferenceConstants.cityTypeRef);
+		
 		//按条件进行筛选
 		List<City> currentList = new ArrayList<City>();
 		int start = ((pageNum<1?1:pageNum) - 1) * pageSize;

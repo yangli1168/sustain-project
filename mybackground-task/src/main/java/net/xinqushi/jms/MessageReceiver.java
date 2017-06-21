@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import net.xinqushi.common.constants.JMSConstants;
 
+
 /**
  * 消息接收工具
  * @author yangli

@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 public class PageUtils {
 	
 	/** 返回分页查询记录首地址*/
-	public int calcPageStart(int pageNum, int pageSize) {
+	public static int calcPageStart(int pageNum, int pageSize) {
 		if (pageNum <= 0) {
 			pageNum = 1;
 		}
@@ -17,7 +17,7 @@ public class PageUtils {
 	}
 	
 	/** 返回分页查询参数*/
-	public Pair<Integer, Integer> getPageRequestInfo(JSONObject jo){
+	public static Pair<Integer, Integer> getPageRequestInfo(JSONObject jo){
 		Integer pageNum = jo.getInteger("pageNum");
 		Integer pageSize = jo.getInteger("pageSize");
 		

@@ -20,23 +20,12 @@ public class Configuration {
 	@Value("${special.phone}")
 	private String specialPhone;
 	
-	@Value("${passenger.reservation.taken}")
-	private String resvInfo;
-	
 //
 //	@Value("${redis.max.conn}")
 //	private int maxConn;
 //
 //	@Value("${redis.max.idle}")
 //	private int maxIdle;
-
-	public String getResvInfo() {
-		return resvInfo;
-	}
-
-	public void setResvInfo(String resvInfo) {
-		this.resvInfo = resvInfo;
-	}
 
 	public String getSpecialPhone() {
 		return specialPhone;

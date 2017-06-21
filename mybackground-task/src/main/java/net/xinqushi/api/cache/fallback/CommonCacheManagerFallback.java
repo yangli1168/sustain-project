@@ -66,7 +66,7 @@ public class CommonCacheManagerFallback implements CommonCacheManager {
     }
 
 	@Override
-	public void hdel(String cityParamUpdated, String name) {
+	public void hdel(String key, String field) {
 		// TODO Auto-generated method stub
 	}
 }

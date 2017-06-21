@@ -307,6 +307,29 @@ public class CommonCacheService extends AbstractCacheService {
 		}
 	}
 	
+	public void hdel(String key, String field) throws CommonException {
+		try {
+			
+			JedisPool pool = cacheWrapper.getPool();
+			if (pool != null) {
+				try (Jedis jedis = pool.getResource()) {
+					jedis.select(0);
+					try {
+						jedis.hdel(key, field);
+					} catch (Exception e) {
+						logger.error("Fail to hdel value", e);
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			logger.error("Fail to hdel key", e);
+			throw new CommonException("Fail to hdel key");
+		}
+	}
+	
+	
+	
 	public void cacheCaptchaKeyCode(String captchaKey, String captcha, int timeout) throws CommonException {
 		JedisPool pool = cacheWrapper.getPool();
 		if (pool != null) {

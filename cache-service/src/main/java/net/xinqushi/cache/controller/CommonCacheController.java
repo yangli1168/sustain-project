@@ -73,4 +73,9 @@ public class CommonCacheController {
 	        throws CommonException {
 		return commonCacheService.isCaptchaValid(captchaKey, captcha);
 	}
+	
+	@RequestMapping(value = "/hdel", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void hdel(@RequestParam("key") String key, @RequestParam("field") String field) throws CommonException{
+		commonCacheService.hdel(key, field);
+	}
 }

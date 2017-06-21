@@ -19,6 +19,7 @@ import net.xinqushi.common.exceptions.CommonException;
 import net.xinqushi.jms.ManagementEventPublisher;
 import net.xinqushi.orm.entity.City;
 import net.xinqushi.orm.mapper.CityMapper;
+import net.xinqushi.util.JedisPoolUtil;
 import net.xinqushi.vo.ManagementEvent;
 
 /**
@@ -43,7 +44,9 @@ public class CityCache {
 	@PostConstruct
 	public void init() throws CommonException {
 		try {
+				logger.info("start to initialize cityInfo to redis");
 				this.cacheCities();
+				logger.info("initialize cityInfo to redis success");
 		} catch (Exception e) {
 			logger.error("Fail to initialize cityInfo", e);
 		}
@@ -57,6 +60,9 @@ public class CityCache {
 			//从缓存删除val
 			this.cacheManager.hdel(CacheConstants.CITY_PARAM_UPDATED, 
 					ManagementEventType.CITY_LIST_UPDATED.name());
+			
+//			JedisPoolUtil.getJedis().hdel(CacheConstants.CITY_PARAM_UPDATED,
+//					ManagementEventType.CITY_LIST_UPDATED.name());
 			//判断:若缓存中无标志，则缓存城市列表
 			if (null != val) {
 				this.cacheCities();
@@ -77,7 +83,10 @@ public class CityCache {
 			if (cityList == null) {
 				cityList = new ArrayList<City>();
 			}
-			this.cacheManager.cache(CacheConstants.CITY_KEY, JSON.toJSONString(cityList));
+			
+			JedisPoolUtil.getJedis().set(CacheConstants.CITY_KEY, JSON.toJSONString(cityList));
+			
+//			this.cacheManager.cache(CacheConstants.CITY_KEY, JSON.toJSONString(cityList));
 			return cityList;
 		} catch (Exception e) {
 			logger.error("Fail to cache lines", e);

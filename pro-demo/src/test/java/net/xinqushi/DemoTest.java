@@ -25,7 +25,12 @@ import redis.clients.jedis.Jedis;
 public class DemoTest {
 
 	public static void main(String[] args) {
-		getAvailableTimeSlots(33, "SHARE", 4);
+//		getAvailableTimeSlots(33, "SHARE", 4);
+		
+		Jedis jedis = JedisPoolUtil.getJedis();
+		jedis.set("test", "测试");
+		System.out.println(jedis.get("test"));
+		
 		
 //		System.out.println(CommonStatus.toString(CommonStatus.VALID));
 //		System.out.println(CommonStatus.VALID.toString());

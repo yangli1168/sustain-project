@@ -27,21 +27,21 @@
 		<beans:property name="jobDetail" ref="populateLineTimePriceCacheTask" />
 		<!-- 配置执行时间 -->
 		<!-- <beans:property name="cronExpression" value="${scheduling.populatelinecache}" /> -->
-		<beans:property name="cronExpression" value="0 0/5 * * * ?" />
+		<beans:property name="cronExpression" value="0 0/3 * * * ?" />
 	</beans:bean>
 	<beans:bean id="dataSynchronismTaskTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<beans:property name="jobDetail" ref="dataSynchronismTask" />
 		<!-- 配置执行时间 -->
 		<!-- <beans:property name="cronExpression" value="${scheduling.populatelinecache}" /> -->
-		<beans:property name="cronExpression" value="0 0/10 * * * ?" />
+		<beans:property name="cronExpression" value="0 0/8 * * * ?" />
 	</beans:bean>
 	<beans:bean id="myTestTaskTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<beans:property name="jobDetail" ref="myTestTask" />
 		<!-- 配置执行时间 -->
 		<!-- <beans:property name="cronExpression" value="${scheduling.populatelinecache}" /> -->
-		<beans:property name="cronExpression" value="0 0/1 * * * ?" />
+		<beans:property name="cronExpression" value="0 0/5 * * * ?" />
 	</beans:bean>
 	<!-- 触发器配置end -->
 	
