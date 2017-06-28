@@ -16,9 +16,9 @@ import net.xinqushi.common.entity.ManagementUserElement;
 import net.xinqushi.common.exceptions.CommonException;
 
 @Component
-public class ManagementTokenService {
+public class ManagementCacheService {
 
-	private static Logger logger = LoggerFactory.getLogger(ManagementTokenService.class);
+	private static Logger logger = LoggerFactory.getLogger(ManagementCacheService.class);
 	
 	@Autowired
 	private CacheWrapper cacheWrapper;
