@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<context:component-scan base-package="net.xinqushi.web.security" />
+
+	<sec:http name="restful" auto-config="false"
+		entry-point-ref="authenticationEntryPoint" create-session="stateless"
+		pattern="/xinqushi/**">
+		<sec:intercept-url pattern="/**"
+			access="hasRole('ROLE_SOMEONE')" method="OPTIONS" />
+		<sec:intercept-url pattern="/xinqushi/user/login"
+			access="hasRole('ROLE_SOMEONE')" method="POST" />
+		<sec:intercept-url pattern="/xinqushi/captcha/stream"
+			access="hasRole('ROLE_SOMEONE')" method="GET" />
+		<sec:intercept-url pattern="/xinqushi/captcha/image"
+			access="hasRole('ROLE_SOMEONE')" method="GET" />
+		<sec:intercept-url pattern="/utoo/**" access="hasRole('ROLE_USER')" />
+		<sec:custom-filter position="PRE_AUTH_FILTER"
+			ref="preAuthenticatedProcessingFilter" />
+		<sec:csrf disabled="true" />
+	</sec:http>
+	
+	<beans:bean id="preAuthenticatedProcessingFilter"
+		class="net.xinqushi.web.security.RestPreAuthenticatedProcessingFilter">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="noneSecurityList">
+			<beans:list>
+				<beans:value>/xinqushi/user/login</beans:value>
+				<beans:value>/xinqushi/captcha/stream</beans:value>
+				<beans:value>/xinqushi/captcha/image</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="authenticationEntryPoint"
+		class="net.xinqushi.web.security.RestAuthenticationEntryPoint" />
+
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider ref="authenticationProvider" />
+	</sec:authentication-manager>
+
+	<beans:bean id="authenticationProvider"
+		class="net.xinqushi.web.security.RestAuthenticationProvider">
+	</beans:bean>
+
+	<sec:global-method-security
+		secured-annotations="enabled" jsr250-annotations="enabled"
+		pre-post-annotations="enabled">
+	</sec:global-method-security>
+
+	<beans:bean id="logoutHandler" class="net.xinqushi.web.security.RestLogoutHandler" />
+
+</beans:beans>

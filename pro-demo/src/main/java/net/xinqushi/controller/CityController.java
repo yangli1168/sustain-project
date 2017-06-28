@@ -22,7 +22,7 @@ import net.xinqushi.util.Pair;
  * @author yangli
  */
 @RestController
-@RequestMapping(value = "/city", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/xinqushi/city", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CityController {
 	
 	@Autowired

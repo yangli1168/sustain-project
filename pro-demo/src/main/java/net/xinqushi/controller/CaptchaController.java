@@ -29,7 +29,7 @@ import net.xinqushi.util.MD5;
  * 2017年5月17日-上午10:55:26
  */
 @RestController
-@RequestMapping(value = "/captcha")
+@RequestMapping(value = "/xinqushi/captcha")
 public class CaptchaController {
 	
 	private static Logger logger = LoggerFactory.getLogger(CaptchaController.class);

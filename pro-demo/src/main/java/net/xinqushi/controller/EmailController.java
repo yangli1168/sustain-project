@@ -17,7 +17,7 @@ import net.xinqushi.service.EmailService;
  * @author yangli
  */
 @RestController
-@RequestMapping(value = "/mail")
+@RequestMapping(value = "/xinqushi/mail")
 public class EmailController {
 	@Autowired
 	private EmailService emailService;

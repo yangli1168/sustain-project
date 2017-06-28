@@ -24,7 +24,7 @@ import net.xinqushi.service.AuditLogService;
 import net.xinqushi.util.PageUtils;
 import net.xinqushi.util.Pair;
 @RestController
-@RequestMapping(value = "/log", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/xinqushi/log", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AuditLogController{
 	
 	@Autowired

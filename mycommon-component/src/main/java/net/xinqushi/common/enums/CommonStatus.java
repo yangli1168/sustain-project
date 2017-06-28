@@ -4,26 +4,28 @@ package net.xinqushi.common.enums;
  * @author yangli
  */
 public enum CommonStatus {
-	/** 合法*/
-	VALID, 
-	/** 非法*/
-	INVALID, 
+	/** 有效*/
+	VALID("有效"), 
+	/** 无效*/
+	INVALID("无效"), 
 	/** 删除*/
-	DELETED;
+	DELETED("删除");
 	
-	public static String toString(CommonStatus status){
-		String result = null;
-		switch (status) {
-		case VALID:
-			result = "有效";
-			break;
-		case INVALID:
-			result = "无效";
-			break;
-		case DELETED:
-			result = "删除";
-			break;
-		}
-		return result;
+	private final String status;
+	
+	private CommonStatus(String status) {
+		this.status = status;
+	}
+	
+	/** 返回文字说明*/
+	public String getExplain(){
+		return status;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println(CommonStatus.VALID);
+		System.out.println(CommonStatus.VALID.ordinal());
+		System.out.println(CommonStatus.VALID.getExplain());
 	}
 }

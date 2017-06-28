@@ -22,6 +22,12 @@ public class Configuration {
 
 	@Value("${redis.max.idle}")
 	private int maxIdle;
+	
+	@Value("${token.expiry.user}")
+	private int tokenExpireTime;
+
+	@Value("${token.expiry.manage}")
+	private int manTokenExpireTime;
 
 	public String getRedisHost() {
 		return redisHost;
@@ -41,6 +47,14 @@ public class Configuration {
 
 	public int getMaxIdle() {
 		return maxIdle;
+	}
+
+	public int getTokenExpireTime() {
+		return tokenExpireTime;
+	}
+
+	public int getManTokenExpireTime() {
+		return manTokenExpireTime;
 	}
 
 }

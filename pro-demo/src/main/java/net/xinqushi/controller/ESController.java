@@ -24,7 +24,7 @@ import net.xinqushi.service.ElasticSearchService;
  * @Description:es服务
  */
 @RestController
-@RequestMapping(value = "/es")
+@RequestMapping(value = "/xinqushi/es")
 public class ESController {
 	
 	@Autowired
