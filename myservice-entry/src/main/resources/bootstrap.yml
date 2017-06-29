@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: myservice-entry
+  cloud:
+    config:
+      uri: http://localhost:8888
+      failFast: true
