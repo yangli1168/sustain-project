@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.net</groupId>
 	<artifactId>mybackground-task</artifactId>
-	<version>2017.0620.01</version>
+	<version>2017.0629.01</version>
 	<properties>
 		<jdk-version>1.8</jdk-version>
 		<source-encoding>UTF-8</source-encoding>
@@ -55,7 +55,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.utoo.Application</mainClass>
+					<mainClass>net.xinqushi.Application</mainClass>
 					<layout>ZIP</layout>
 				</configuration>
 				<executions>
