@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<context:component-scan base-package="net.xinqushi.cache.expiredetection" />
+
+	<beans:bean id="targetConnectionFactory"
+		class="org.apache.activemq.ActiveMQSslConnectionFactory">
+		<beans:property name="brokerURL" value="${mq.broker.url}" />
+		<beans:property name="userName" value="${mq.broker.username}" />
+		<beans:property name="password" value="${mq.broker.password}" />
+		<beans:property name="useAsyncSend" value="true" />
+	</beans:bean>
+
+	<beans:bean id="pooledConnectionFactory"
+		class="org.apache.activemq.pool.PooledConnectionFactory">
+		<beans:property name="connectionFactory" ref="targetConnectionFactory" />
+		<beans:property name="maxConnections" value="10" />
+	</beans:bean>
+
+	<beans:bean id="connectionFactory"
+		class="org.springframework.jms.connection.SingleConnectionFactory">
+		<beans:property name="targetConnectionFactory" ref="pooledConnectionFactory" />
+	</beans:bean>
+
+	<beans:bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<beans:property name="connectionFactory" ref="connectionFactory" />
+	</beans:bean>
+
+	<beans:bean id="reservCheckDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<beans:constructor-arg>
+			<beans:value>${mq.queue.reserv.check}</beans:value>
+		</beans:constructor-arg>
+	</beans:bean>
+	
+	<beans:bean id="driverWatingDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<beans:constructor-arg>
+			<beans:value>${mq.queue.driver.waiting}</beans:value>
+		</beans:constructor-arg>
+	</beans:bean>
+
+</beans:beans>

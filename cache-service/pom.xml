@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.net</groupId>
 	<artifactId>cache-service</artifactId>
-	<version>2017.0609.01</version>
+	<version>2017.0724.01</version>
 	
 	<properties>
 		<jdk-version>1.7</jdk-version>
@@ -284,6 +284,14 @@
 			<groupId>com.qiniu</groupId>
 			<artifactId>qiniu-java-sdk</artifactId>
 			<version>7.0.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
 		</dependency>
 	</dependencies>
 
