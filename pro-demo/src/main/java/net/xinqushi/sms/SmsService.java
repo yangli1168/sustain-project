@@ -32,9 +32,6 @@ public class SmsService {
 
 	@PostConstruct
 	public void init() {
-		URL = "http://cf.51welink.com/submitdata/Service.asmx/g_Submit";
-		USERNAME = "dlyoutu0";
-		PASSWORD = "29xuydnQ";
 	}
 
 	public boolean sendMsg(String phone, String tplId, String[] args) {
@@ -87,37 +84,13 @@ public class SmsService {
 		return false;
 	}
 
-	public static void main(String[] args) {
-		String result = "";
-		HashMap<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("sname", "dlyoutu0");
-		paramMap.put("spwd", "29xuydnQ");
-		paramMap.put("scorpid", "");
-		// if(tplId.equals(SmsConstants.TEMPLATE_VERCODE)){
-		paramMap.put("sprdid", CHANNEL_888);
-		// }else {
-		// paramMap.put("sprdid", CHANNEL_818);
-		// }
-		paramMap.put("sdst", "13540268360");
-//		paramMap.put("smsg", "【UTo城际出行】您的验证码是1234,请于1分钟内正确输入。");
-		
-		String[] msg = { "陛下", "欢迎使用悠途服务，祝您生活愉快！"};
-		String msgFormat = StringUtils.msgFormat(matchTplValue("10000"), msg);
-		paramMap.put("smsg", msgFormat);
-		
-		logger.info("Send SMS request: " + paramMap);
-		result = HttpUtil.post("http://cf.51welink.com/submitdata/Service.asmx/g_Submit", paramMap);
-		logger.info("Send SMS request result: " + result);
-
-	}
-
 	private static String matchTplValue(String tplId) {
 
 		String template = "";
 
 		switch (tplId) {
 		case SmsConstants.TEMPLATE_VERCODE:
-			template = "【UTo城际出行】亲爱的{1},{2}!";
+			template = "【测试】亲爱的{1},{2}!";
 			break;
 		default:
 			template = "TPL_NOT_FOUND";
