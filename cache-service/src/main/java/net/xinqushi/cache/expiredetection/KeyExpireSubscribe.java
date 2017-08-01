@@ -24,6 +24,9 @@ public class KeyExpireSubscribe extends JedisPubSub {
     @Value("${redis.check.pattern.dwaiting}")
     private String driverWaitingPatternStrs;
     
+    @Value("${redis.check.pattern.activity}")
+    private String activityPatternStrs;
+    
     @Autowired
     private MsgProducer msgProducer;
     
@@ -33,15 +36,40 @@ public class KeyExpireSubscribe extends JedisPubSub {
     @Autowired
     private Destination driverWatingDestination;
     
+    @Autowired
+    private Destination activityDestination;
+    
     @PostConstruct
     public void init() {
-    	logger.info("Checking reservation pattern {}, {}", this.reservCheckPatternStr, this.driverWaitingPatternStrs);
+    	logger.info("Checking reservation pattern {}, {}, {}", 
+    			this.reservCheckPatternStr, this.driverWaitingPatternStrs, this.activityPatternStrs);
     }
     
 	public void onPMessage(String pattern, String channel, String message) {		
 		sendMsg2ReservCheckMQ(message);
 		
 		sendMsg2DriverWaitingMQ(message);
+		
+		sendMsg2activityCheckMQ(message);
+	}
+	
+	private void sendMsg2activityCheckMQ(String message) {
+		Pattern mpattern = Pattern.compile(activityPatternStrs);
+		
+		logger.info("Got activity_check message {}", message);
+		
+		if (message != null) {
+			try {
+				Matcher matcher = mpattern.matcher(message);
+				if (matcher.matches() && matcher.groupCount() >= 1) {
+					msgProducer.sendMessage(matcher.group(1), activityDestination);
+				} else {
+					logger.error("No match for activity_check");
+				}
+			} catch (Exception e) {
+				logger.error("Fail to send activity_check message", e);
+			}
+		}
 	}
 
 	private void sendMsg2ReservCheckMQ(String message) {

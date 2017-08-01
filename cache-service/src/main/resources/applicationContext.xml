@@ -43,5 +43,11 @@
 			<beans:value>${mq.queue.driver.waiting}</beans:value>
 		</beans:constructor-arg>
 	</beans:bean>
+	
+	<beans:bean id="activityDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<beans:constructor-arg>
+			<beans:value>${mq.queue.activity.check}</beans:value>
+		</beans:constructor-arg>
+	</beans:bean>
 
 </beans:beans>
