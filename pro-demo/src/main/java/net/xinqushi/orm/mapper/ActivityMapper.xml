@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.xinqushi.orm.mapper.ActivityMapper" >
+  <resultMap id="BaseResultMap" type="net.xinqushi.orm.entity.Activity" >
+    <id column="activityId" property="activityId" jdbcType="BIGINT" />
+    <result column="createTime" property="createTime" jdbcType="BIGINT" />
+    <result column="startTime" property="startTime" jdbcType="BIGINT" />
+    <result column="endTime" property="endTime" jdbcType="BIGINT" />
+    <result column="headImgUrl" property="headImgUrl" jdbcType="VARCHAR" />
+    <result column="listImgUrl" property="listImgUrl" jdbcType="VARCHAR" />
+    <result column="contentHtml" property="contentHtml" jdbcType="VARCHAR" />
+    <result column="jumpTabId" property="jumpTabId" jdbcType="INTEGER" />
+    <result column="shareTitle" property="shareTitle" jdbcType="VARCHAR" />
+    <result column="shareDescr" property="shareDescr" jdbcType="VARCHAR" />
+    <result column="shareUrl" property="shareUrl" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updateTime" jdbcType="BIGINT" />
+    <result column="jumpType" property="jumpType" jdbcType="TINYINT" />
+    <result column="appVersion" property="appVersion" jdbcType="VARCHAR" />
+    <result column="buttonText" property="buttonText" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="jumpContent" property="jumpContent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    activityId, createTime, startTime, endTime, headImgUrl, listImgUrl, contentHtml, 
+    jumpTabId, shareTitle, shareDescr, shareUrl, updateTime, jumpType, appVersion, buttonText, 
+    subject, status, type, jumpContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_activity
+    where activityId = #{activityId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tbl_activity
+    where activityId = #{activityId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="net.xinqushi.orm.entity.Activity" >
+    insert into tbl_activity (activityId, createTime, startTime, 
+      endTime, headImgUrl, listImgUrl, 
+      contentHtml, jumpTabId, shareTitle, 
+      shareDescr, shareUrl, updateTime, 
+      jumpType, appVersion, buttonText, 
+      subject, status, type, 
+      jumpContent)
+    values (#{activityId,jdbcType=BIGINT}, #{createTime,jdbcType=BIGINT}, #{startTime,jdbcType=BIGINT}, 
+      #{endTime,jdbcType=BIGINT}, #{headImgUrl,jdbcType=VARCHAR}, #{listImgUrl,jdbcType=VARCHAR}, 
+      #{contentHtml,jdbcType=VARCHAR}, #{jumpTabId,jdbcType=INTEGER}, #{shareTitle,jdbcType=VARCHAR}, 
+      #{shareDescr,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR}, #{updateTime,jdbcType=BIGINT}, 
+      #{jumpType,jdbcType=TINYINT}, #{appVersion,jdbcType=VARCHAR}, #{buttonText,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{jumpContent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.xinqushi.orm.entity.Activity" >
+    insert into tbl_activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="activityId != null" >
+        activityId,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="startTime != null" >
+        startTime,
+      </if>
+      <if test="endTime != null" >
+        endTime,
+      </if>
+      <if test="headImgUrl != null" >
+        headImgUrl,
+      </if>
+      <if test="listImgUrl != null" >
+        listImgUrl,
+      </if>
+      <if test="contentHtml != null" >
+        contentHtml,
+      </if>
+      <if test="jumpTabId != null" >
+        jumpTabId,
+      </if>
+      <if test="shareTitle != null" >
+        shareTitle,
+      </if>
+      <if test="shareDescr != null" >
+        shareDescr,
+      </if>
+      <if test="shareUrl != null" >
+        shareUrl,
+      </if>
+      <if test="updateTime != null" >
+        updateTime,
+      </if>
+      <if test="jumpType != null" >
+        jumpType,
+      </if>
+      <if test="appVersion != null" >
+        appVersion,
+      </if>
+      <if test="buttonText != null" >
+        buttonText,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="jumpContent != null" >
+        jumpContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="activityId != null" >
+        #{activityId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="headImgUrl != null" >
+        #{headImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="listImgUrl != null" >
+        #{listImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentHtml != null" >
+        #{contentHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpTabId != null" >
+        #{jumpTabId,jdbcType=INTEGER},
+      </if>
+      <if test="shareTitle != null" >
+        #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDescr != null" >
+        #{shareDescr,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null" >
+        #{shareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="jumpType != null" >
+        #{jumpType,jdbcType=TINYINT},
+      </if>
+      <if test="appVersion != null" >
+        #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonText != null" >
+        #{buttonText,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpContent != null" >
+        #{jumpContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="net.xinqushi.orm.entity.Activity" >
+    update tbl_activity
+    <set >
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="startTime != null" >
+        startTime = #{startTime,jdbcType=BIGINT},
+      </if>
+      <if test="endTime != null" >
+        endTime = #{endTime,jdbcType=BIGINT},
+      </if>
+      <if test="headImgUrl != null" >
+        headImgUrl = #{headImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="listImgUrl != null" >
+        listImgUrl = #{listImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="contentHtml != null" >
+        contentHtml = #{contentHtml,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpTabId != null" >
+        jumpTabId = #{jumpTabId,jdbcType=INTEGER},
+      </if>
+      <if test="shareTitle != null" >
+        shareTitle = #{shareTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="shareDescr != null" >
+        shareDescr = #{shareDescr,jdbcType=VARCHAR},
+      </if>
+      <if test="shareUrl != null" >
+        shareUrl = #{shareUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="jumpType != null" >
+        jumpType = #{jumpType,jdbcType=TINYINT},
+      </if>
+      <if test="appVersion != null" >
+        appVersion = #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="buttonText != null" >
+        buttonText = #{buttonText,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpContent != null" >
+        jumpContent = #{jumpContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where activityId = #{activityId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.xinqushi.orm.entity.Activity" >
+    update tbl_activity
+    set createTime = #{createTime,jdbcType=BIGINT},
+      startTime = #{startTime,jdbcType=BIGINT},
+      endTime = #{endTime,jdbcType=BIGINT},
+      headImgUrl = #{headImgUrl,jdbcType=VARCHAR},
+      listImgUrl = #{listImgUrl,jdbcType=VARCHAR},
+      contentHtml = #{contentHtml,jdbcType=VARCHAR},
+      jumpTabId = #{jumpTabId,jdbcType=INTEGER},
+      shareTitle = #{shareTitle,jdbcType=VARCHAR},
+      shareDescr = #{shareDescr,jdbcType=VARCHAR},
+      shareUrl = #{shareUrl,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=BIGINT},
+      jumpType = #{jumpType,jdbcType=TINYINT},
+      appVersion = #{appVersion,jdbcType=VARCHAR},
+      buttonText = #{buttonText,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      jumpContent = #{jumpContent,jdbcType=VARCHAR}
+    where activityId = #{activityId,jdbcType=BIGINT}
+  </update>
+  
+   <!-- 活动列表 -->
+  <select id="listActivities" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+	from tbl_activity
+	where type = #{type}
+	<if test="subject != null">
+		and subject like CONCAT('%',#{subject,jdbcType=VARCHAR},'%')
+	</if>
+	<if test="status == null">
+		and status != 3
+	</if>
+	<if test="status != null">
+		and status = #{status}
+	</if>
+	order by status asc, updateTime desc, startTime desc, createTime asc
+	limit #{start}, #{pageSize}
+  </select>
+  
+  <!-- 活动列表计数 -->
+  <select id="countListActivities" resultType="java.lang.Integer">
+  	select 
+  	  count(*)
+	from tbl_activity
+	where type = #{type}
+	<if test="subject != null">
+		and subject like CONCAT('%',#{subject,jdbcType=VARCHAR},'%')
+	</if>
+	<if test="status == null">
+		and status != 3
+	</if>
+	<if test="status != null">
+		and status = #{status}
+	</if>
+  </select>
+</mapper>

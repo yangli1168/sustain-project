@@ -2,6 +2,7 @@ package net.xinqushi.cache.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.xinqushi.cache.common.CommonException;
 import net.xinqushi.cache.service.CommonCacheService;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/cache/common")
 public class CommonCacheController {

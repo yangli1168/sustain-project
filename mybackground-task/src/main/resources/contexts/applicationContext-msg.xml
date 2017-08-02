@@ -36,6 +36,29 @@
 		</constructor-arg>
 	</bean>
 	
+	<!-- activity -->
+	<bean id="activityCheckDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>${mq.queue.name.activity.check}</value>
+		</constructor-arg>
+	</bean>
+	<bean id="activityProcessor"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="jmsConnFactory" />
+		<property name="destination" ref="activityCheckDestination" />
+		<property name="messageListener" ref="activityCheckReceiver" />
+		<property name="sessionAcknowledgeMode" value="1" />
+		<property name="pubSubDomain" value="true" />
+		<property name="subscriptionDurable" value="true" />
+		<property name="clientId" value="${mq.client.activity.check}" />
+		<property name="durableSubscriptionName" value="${mq.client.activity.check}" />
+		<property name="concurrentConsumers" value="2" />
+		<property name="maxConcurrentConsumers" value="6" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="idleTaskExecutionLimit" value="10" />
+		<property name="idleConsumerLimit" value="5" />
+	</bean>
+	
 	<!-- audit logs -->
 	<bean id="auditLogDestination" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg>
