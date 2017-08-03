@@ -32,14 +32,14 @@ public class ActivityServiceImpl implements ActivityService {
 		try {
 			//1、新增
 			this.activityMapper.insertSelective(record);
-			//2、向队列写入检测时间用以更新状态[生效]
+			//2、向redis缓存写入标志检测时间用以更新状态[生效]
 			Long timeout = ((record.getStartTime() - System.currentTimeMillis())/1000);
-			this.commonCacheManager.cacheForExpiry("expire:activity." + record.getActivityId() + ".created", "", timeout.intValue());
-			//2、向队列写入检测时间用以更新状态[失效]
+			this.commonCacheManager.cacheForExpiry("activity." + record.getActivityId() + ".created", "", timeout.intValue());
+			//2、向redis缓存写入标志检测时间用以更新状态[失效]
 			if (5 == record.getJumpType()) {
 				//生效时间持续1天
 				timeout = timeout + 24*60*60;
-				this.commonCacheManager.cacheForExpiry("expire:activity." + record.getActivityId() + ".destory", "", timeout.intValue());
+				this.commonCacheManager.cacheForExpiry("activity." + record.getActivityId() + ".destory", "", timeout.intValue());
 			}
 		} catch (Exception e) {
 			logger.error("fail to creat activity: {}", e.getMessage());

@@ -38,6 +38,9 @@
     where activityId = #{activityId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="net.xinqushi.orm.entity.Activity" >
+  	<selectKey resultType="java.lang.Long" keyProperty="activityId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tbl_activity (activityId, createTime, startTime, 
       endTime, headImgUrl, listImgUrl, 
       contentHtml, jumpTabId, shareTitle, 
@@ -54,6 +57,9 @@
       #{jumpContent,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="net.xinqushi.orm.entity.Activity" >
+  	<selectKey resultType="java.lang.Long" keyProperty="activityId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into tbl_activity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="activityId != null" >

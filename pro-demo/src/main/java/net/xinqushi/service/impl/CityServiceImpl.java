@@ -91,6 +91,9 @@ public class CityServiceImpl implements CityService {
 		//从缓存服务中取出
 		String cityStr = this.cacheManager.getCacheValue(CacheConstants.CITY_KEY);
 		//转换
+		if (null == cityStr) {
+			throw new CommonException("调用缓存服务失败");
+		}
 		Pair<List<City>, Integer> pageInfo = convertCity(cityName, pageNum, pageSize, cityStr);
 		return pageInfo;
 	}

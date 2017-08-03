@@ -15,20 +15,20 @@ public class CommonCacheManagerFallback implements CommonCacheManager {
 
 	@Override
 	public void cacheForExpiry(String key, String value, int timeout) throws CommonException {
-		System.out.println("############################");
-
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void cache(String key, String value) throws CommonException {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void cacheNx(String key, String value, int timeout) throws CommonException {
+	public Long cacheNx(String key, String value, int timeout) throws CommonException {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
 	@Override
@@ -40,28 +40,44 @@ public class CommonCacheManagerFallback implements CommonCacheManager {
 	@Override
 	public void removeKey(String key) throws CommonException {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-    public void hset(String key, String field, String value) throws CommonException {
-	    // TODO Auto-generated method stub
-	    
-    }
+	public void hset(String key, String field, String value) throws CommonException {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
-    public String hget(String key, String field) throws CommonException {
-	    // TODO Auto-generated method stub
-	    return null;
-    }
+	public String hget(String key, String field) throws CommonException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-    public void cacheCaptchaKeyCode(String captchaKey, String captcha, int timeout) throws CommonException {
-		throw new CommonException("内部错误");
-    }
+	public int cacheForVerificationCode(String key, String value, String type, int timeout, String ip)
+			throws CommonException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
-    public int isCaptchaValid(String captchaKey, String captcha) throws CommonException {
-	    return 2;
-    }
+	public void cacheCaptchaKeyCode(String captchaKey, String captcha, int timeout) throws CommonException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int isCaptchaValid(String captchaKey, String captcha) throws CommonException {
+		// TODO Auto-generated method stub
+		return 2;
+	}
+
+	@Override
+	public void hdel(String key, String field) throws CommonException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
