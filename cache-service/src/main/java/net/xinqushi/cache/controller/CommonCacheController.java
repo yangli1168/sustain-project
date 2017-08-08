@@ -79,4 +79,9 @@ public class CommonCacheController {
 	public void hdel(@RequestParam("key") String key, @RequestParam("field") String field) throws CommonException{
 		commonCacheService.hdel(key, field);
 	}
+	
+	@RequestMapping(value = "/seq", method = RequestMethod.GET, produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public String nextSeq(@RequestParam("seqDescribe") String seqDescribe, @RequestParam("prefix") String prefix) throws CommonException{
+	    return commonCacheService.getNextSeq(seqDescribe, prefix);
+	}
 }
